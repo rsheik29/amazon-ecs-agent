@@ -76,6 +76,7 @@ func StartMetricsSession(params *TelemetrySessionParams) {
 // the time the websocket client starts using it.
 func StartSession(params *TelemetrySessionParams, statsEngine stats.Engine) error {
 	backoff := retry.NewExponentialBackoff(time.Second, 1*time.Minute, 0.2, 2)
+	seelog.Errorf("session has just started")
 	for {
 		tcsError := startTelemetrySession(params, statsEngine)
 		if tcsError == nil || tcsError == io.EOF {
