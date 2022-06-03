@@ -58,9 +58,8 @@ func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error
 		return v, err
 	}
 	p.SetExpiration(time.Now().Add(p.RotationInterval), 0)
-	seelog.Infof("Successfully got instance credentials from file %s. %s",
+	seelog.Infof("RS Successfully got instance credentials from file %s. %s",
 		p.sharedCredentialsProvider.Filename, credValueToString(v))
-	seelog.Infof("credential check by RIYA")
 	return v, err
 }
 
