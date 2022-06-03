@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/internal/ini"
 	"github.com/aws/aws-sdk-go/internal/shareddefaults"
+	"github.com/cihub/seelog"
 )
 
 // SharedCredsProviderName provides a name of SharedCreds provider
