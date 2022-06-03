@@ -63,7 +63,6 @@ func (p *SharedCredentialsProvider) Retrieve() (Value, error) {
 	if err != nil {
 		return Value{ProviderName: SharedCredsProviderName}, err
 	}
-	seelog.Infof("This is the Session token: %s", creds.SessionToken)
 	p.retrieved = true
 	return creds, nil
 }
