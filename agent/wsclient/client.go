@@ -147,7 +147,7 @@ type MakeRequestHookFunc func([]byte) ([]byte, error)
 // 'MakeRequest' can be made after calling this, but responses will not be
 // receivable until 'Serve' is also called.
 func (cs *ClientServerImpl) Connect() error {
-	logger.Info("Establishing a Websocket connection", logger.Fields{
+	logger.Info("Establishing a Websocket connection in Connect() -riya", logger.Fields{
 		"url": cs.URL,
 	})
 	parsedURL, err := url.Parse(cs.URL)
@@ -198,6 +198,7 @@ func (cs *ClientServerImpl) Connect() error {
 	}
 
 	websocketConn, httpResponse, err := dialer.Dial(parsedURL.String(), request.Header)
+	seelog.Infof("dialing websocket here (ACS) -riya")
 	if httpResponse != nil {
 		defer httpResponse.Body.Close()
 	}

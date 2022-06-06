@@ -45,6 +45,7 @@ func New(url string, cfg *config.Config, credentialProvider *credentials.Credent
 	cs.RequestHandlers = make(map[string]wsclient.RequestHandler)
 	cs.TypeDecoder = NewACSDecoder()
 	cs.RWTimeout = rwTimeout
+	seelog.Infof("creating New clientServer struct (-riya)")
 	return cs
 }
 
