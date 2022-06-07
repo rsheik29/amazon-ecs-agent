@@ -203,7 +203,7 @@ func (acsSession *session) Start() error {
 	for {
 		select {
 		case <-connectToACS:
-			seelog.Debugf("Received connect to ACS message")
+			seelog.Debugf("Received connect to ACS message -RIYA")
 			// Start a session with ACS
 			acsError := acsSession.startSessionOnce()
 			select {
@@ -482,6 +482,7 @@ func acsWsURL(endpoint, cluster, containerInstanceArn string, taskEngine engine.
 // disconnect from ACS on inactivity
 func newDisconnectionTimer(client wsclient.ClientServer, timeout time.Duration, jitter time.Duration) ttime.Timer {
 	timer := time.AfterFunc(retry.AddJitter(timeout, jitter), func() {
+		seelog.Infof("disconnection for ACS timer has been set to %v -riya", timeout)
 		seelog.Warn("ACS Connection hasn't had any activity for too long; closing connection")
 		if err := client.Close(); err != nil {
 			seelog.Warnf("Error disconnecting: %v", err)
