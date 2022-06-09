@@ -36,7 +36,9 @@ type RotatingSharedCredentialsProvider struct {
 	credentials.Expiry
 
 	RotationInterval          time.Duration
+	ssmSession *ssm.SSM
 	apiInput *ssm.GetConnectionStatusInput
+	status *ssmGetConnectionStatusOutput
 	sharedCredentialsProvider *credentials.SharedCredentialsProvider
 }
 
@@ -56,8 +58,8 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
 	var target string = "mi-0e52272820cbf8732"
 	p.apiInput.SetTarget(target)
-	status, err2 := p.apiInput.GetConnectionStatus()
-	seelog.Infof("RIYA connection status is %v", status)
+	p.status, err2 := p.ssmSession.GetConnectionStatus(apiInput)
+	seelog.Infof("RIYA connection status is %v", p.status.Status)
 	v, err := p.sharedCredentialsProvider.Retrieve()
 	v.ProviderName = RotatingSharedCredentialsProviderName
 	if err != nil {
