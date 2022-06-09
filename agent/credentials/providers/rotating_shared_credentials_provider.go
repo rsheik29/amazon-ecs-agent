@@ -55,8 +55,8 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
 	var target string = "mi-0e52272820cbf8732"
-	apiInput.setTarget(target)
-	status, err2 := apiInput.getConnectionStatus()
+	p.apiInput.setTarget(target)
+	status, err2 := p.apiInput.getConnectionStatus()
 	seelog.Infof("RIYA connection status is %v", status)
 	v, err := p.sharedCredentialsProvider.Retrieve()
 	v.ProviderName = RotatingSharedCredentialsProviderName
