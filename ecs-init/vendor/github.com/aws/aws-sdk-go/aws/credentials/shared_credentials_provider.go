@@ -53,7 +53,6 @@ func NewSharedCredentials(filename, profile string) *Credentials {
 // users home directory.
 func (p *SharedCredentialsProvider) Retrieve() (Value, error) {
 	p.retrieved = false
-
 	filename, err := p.filename()
 	if err != nil {
 		return Value{ProviderName: SharedCredsProviderName}, err

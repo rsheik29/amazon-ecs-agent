@@ -19,6 +19,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/cihub/seelog"
+	"github.com/aws/awsk-sdk-go/service/ssm"
 )
 
 const (
@@ -35,6 +36,7 @@ type RotatingSharedCredentialsProvider struct {
 	credentials.Expiry
 
 	RotationInterval          time.Duration
+	api_input GetConnectionStatusInput
 	sharedCredentialsProvider *credentials.SharedCredentialsProvider
 }
 
@@ -52,6 +54,10 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
+	var target string = "mi-0e52272820cbf8732"
+	api_input.setTarget(target)
+	status, err := api_input.getConnectionStatus()
+	seelog.Infof("RIYA connection status is %v", status)
 	v, err := p.sharedCredentialsProvider.Retrieve()
 	v.ProviderName = RotatingSharedCredentialsProviderName
 	if err != nil {
