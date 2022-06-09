@@ -19,7 +19,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/cihub/seelog"
-	"github.com/aws/awsk-sdk-go/service/ssm"
+	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
 const (
