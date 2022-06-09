@@ -60,6 +60,7 @@ func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error
 	p.apiInput.SetTarget(target)
 	status, err2 := p.ssmSession.GetConnectionStatus(p.apiInput)
 	seelog.Infof("RIYA connection status is %v", status.Status)
+	seelog.Infof("RIYA connection error is %v", err2)
 	v, err := p.sharedCredentialsProvider.Retrieve()
 	v.ProviderName = RotatingSharedCredentialsProviderName
 	if err != nil {
