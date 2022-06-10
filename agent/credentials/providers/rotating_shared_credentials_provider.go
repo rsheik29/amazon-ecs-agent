@@ -38,7 +38,7 @@ type RotatingSharedCredentialsProvider struct {
 
 	RotationInterval          time.Duration
 	connected bool
-	backoff backoff
+	backoff retry.Backoff
 	sharedCredentialsProvider *credentials.SharedCredentialsProvider
 }
 
@@ -61,7 +61,7 @@ func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error
 	if p.connected == false {
 		reconnectDelay :=p.computeReconnectDelay()
 		seelog.Infof("Attempting to get credentials in: %s", reconnectDelay.String())
-		waitComplete := p.waitForDuratation(reconnectDelay)
+		waitComplete := p.waitForDuration(reconnectDelay)
 		if waitComplete {
 			seelog.Infof("wait complete, attempting to retrieve credentials")
 			v.ProviderName = RotatingSharedCredentialsProviderName
