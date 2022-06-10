@@ -56,7 +56,6 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
-	v, err := p.sharedCredentialsProvider.Retrieve()
 	p.connected = false 
 	if p.connected == false {
 		reconnectDelay :=p.computeReconnectDelay()
@@ -64,6 +63,7 @@ func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error
 		waitComplete := p.waitForDuration(reconnectDelay)
 		if waitComplete {
 			seelog.Infof("wait complete, attempting to retrieve credentials")
+			v, err := p.sharedCredentialsProvider.Retrieve()
 			v.ProviderName = RotatingSharedCredentialsProviderName
 			if err != nil {
 				return v, err
