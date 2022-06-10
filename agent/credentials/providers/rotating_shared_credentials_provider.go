@@ -56,6 +56,7 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
+	seelog.Infof("HERE")
 	var target string = "mi-04403faeea8ab52eb"
 	p.apiInput.SetTarget(target)
 	request, status := p.ssmSession.GetConnectionStatus(p.apiInput)
