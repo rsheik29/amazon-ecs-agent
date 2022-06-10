@@ -19,7 +19,8 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/cihub/seelog"
-	"github.com/aws/aws-sdk-go/service/ssm"
+	"github.com/aws/amazon-ecs-agent/agent/utils/retry"
+
 )
 
 const (
@@ -36,9 +37,8 @@ type RotatingSharedCredentialsProvider struct {
 	credentials.Expiry
 
 	RotationInterval          time.Duration
-	ssmSession *ssm.SSM
-	apiInput *ssm.GetConnectionStatusInput
-	status *ssm.GetConnectionStatusOutput
+	connected bool
+	backoff backoff
 	sharedCredentialsProvider *credentials.SharedCredentialsProvider
 }
 
@@ -56,27 +56,38 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
-	seelog.Infof("HERE")
-	var target string = "mi-04403faeea8ab52eb"
-	p.apiInput.SetTarget(target)
-	// err2 is type error 
-	//status is type GetConnectionStatusOutput
-	status, err2 := p.ssmSession.GetConnectionStatus(p.apiInput)
-	if (err2 == nil) {
-		seelog.Infof("RIYA connection status is %v", status.Status)
-	} else {
-		seelog.Infof("RIYA connection error is %v", err2)
-	}
 	v, err := p.sharedCredentialsProvider.Retrieve()
-	v.ProviderName = RotatingSharedCredentialsProviderName
-	if err != nil {
-		return v, err
+	p.connected = false 
+	if p.connected == false {
+		reconnectDelay :=p.computeReconnectDelay()
+		seelog.Infof("Attempting to get credentials in: %s", reconnectDelay.String())
+		waitComplete := p.waitForDuratation(reconnectDelay)
+		if waitComplete {
+			seelog.Infof("wait complete, attempting to retrieve credentials")
+			v.ProviderName = RotatingSharedCredentialsProviderName
+			if err != nil {
+				return v, err
+			}
+			p.SetExpiration(time.Now().Add(p.RotationInterval), 0)
+			seelog.Infof("RIYA Successfully got instance credentials from file %s. %s",
+			p.sharedCredentialsProvider.Filename, credValueToString(v))
+			seelog.Infof("Expiration time is: %v", p.ExpiresAt())
+			return v, err
+		}
 	}
-	p.SetExpiration(time.Now().Add(p.RotationInterval), 0)
-	seelog.Infof("RIYA Successfully got instance credentials from file %s. %s",
-		p.sharedCredentialsProvider.Filename, credValueToString(v))
-	seelog.Infof("Expiration time is: %v", p.ExpiresAt())
 	return v, err
+}
+
+func (p *RotatingSharedCredentialsProvider) waitForDuration(delay time.Duration) bool {
+	reconnectTimer := time.NewTimer(delay)
+	select {
+	case <-reconnectTimer.C:
+		return true
+	}
+}
+
+func (p *RotatingSharedCredentialsProvider) computeReconnectDelay() time.Duration {
+	return p.backoff.Duration()
 }
 
 func credValueToString(v credentials.Value) string {
