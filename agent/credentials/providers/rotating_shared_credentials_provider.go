@@ -59,9 +59,11 @@ func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error
 	seelog.Infof("HERE")
 	var target string = "mi-04403faeea8ab52eb"
 	p.apiInput.SetTarget(target)
-	request, status := p.ssmSession.GetConnectionStatus(p.apiInput)
+	// err2 is type error 
+	//status is type GetConnectionStatusOutput
+	status, err2 := p.ssmSession.GetConnectionStatus(p.apiInput)
 	seelog.Infof("RIYA connection status is %v", status.Status)
-	seelog.Infof("RIYA connection error is %v", request.error)
+	seelog.Infof("RIYA connection error is %v", err2)
 	v, err := p.sharedCredentialsProvider.Retrieve()
 	v.ProviderName = RotatingSharedCredentialsProviderName
 	if err != nil {
