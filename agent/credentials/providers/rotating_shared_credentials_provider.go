@@ -20,6 +20,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/cihub/seelog"
 	"github.com/aws/amazon-ecs-agent/agent/utils/retry"
+	"github.com/aws/amazon-ecs-agent/agent/utils/ttime"
 
 )
 
@@ -28,6 +29,8 @@ const (
 	defaultRotationInterval = time.Minute
 	// RotatingSharedCredentialsProviderName is the name of this provider
 	RotatingSharedCredentialsProviderName = "RotatingSharedCredentialsProvider"
+	min = 250 * time.Millisecond
+	max = 2 * time.Minute
 )
 
 // RotatingSharedCredentialsProvider is a provider that retrieves credentials via the
@@ -45,25 +48,27 @@ type RotatingSharedCredentialsProvider struct {
 // NewRotatingSharedCredentials returns a rotating shared credentials provider
 // with default values set.
 func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
+	backoff := retry.NewExponentialBackoff(min, max, 0.2, 1.5)
 	return &RotatingSharedCredentialsProvider{
 		RotationInterval: defaultRotationInterval,
 		sharedCredentialsProvider: &credentials.SharedCredentialsProvider{
 			Filename: defaultRotatingCredentialsFilename,
 			Profile:  "default",
+		backoff: backoff,
 		},
 	}
 }
 
 // Retrieve will use the given filename and profile and retrieve AWS credentials.
 func (p *RotatingSharedCredentialsProvider) Retrieve() (credentials.Value, error) {
+	v, err := p.sharedCredentialsProvider.Retrieve()
 	p.connected = false 
 	if p.connected == false {
-		reconnectDelay :=p.computeReconnectDelay()
+		reconnectDelay := p.computeReconnectDelay()
 		seelog.Infof("Attempting to get credentials in: %s", reconnectDelay.String())
 		waitComplete := p.waitForDuration(reconnectDelay)
 		if waitComplete {
 			seelog.Infof("wait complete, attempting to retrieve credentials")
-			v, err := p.sharedCredentialsProvider.Retrieve()
 			v.ProviderName = RotatingSharedCredentialsProviderName
 			if err != nil {
 				return v, err
