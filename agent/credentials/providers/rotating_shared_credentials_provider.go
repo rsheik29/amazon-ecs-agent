@@ -20,8 +20,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/cihub/seelog"
 	"github.com/aws/amazon-ecs-agent/agent/utils/retry"
-	"github.com/aws/amazon-ecs-agent/agent/utils/ttime"
-
 )
 
 const (
@@ -54,8 +52,8 @@ func NewRotatingSharedCredentialsProvider() *RotatingSharedCredentialsProvider {
 		sharedCredentialsProvider: &credentials.SharedCredentialsProvider{
 			Filename: defaultRotatingCredentialsFilename,
 			Profile:  "default",
-		backoff: backoff,
 		},
+		backoff : backoff,
 	}
 }
 
