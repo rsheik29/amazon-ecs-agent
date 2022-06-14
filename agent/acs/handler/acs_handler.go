@@ -211,13 +211,14 @@ func (acsSession *session) Start() error {
 		case <-connectToACS:
 			seelog.Debugf("Received connect to ACS message -RIYA")
 			// Start a session with ACS
-			if acsSession.connected = false {
+			if acsSession.connected == false {
 				reconnectDelay2 := acsSession.computeReconnectDelay2()
 				seelog.Infof("Attempting to connect to ACS: %s", reconnectDelay2.String())
 				waitComplete2 := acsSession.waitForDuration(reconnectDelay2)
 				if waitComplete2 {
 					seelog.Infof("wait complete, attempting to connect to ACS")
 					acsSession.connected = true;
+				}
 			}
 			acsError := acsSession.startSessionOnce()
 			select {
