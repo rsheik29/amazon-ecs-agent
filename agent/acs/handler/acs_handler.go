@@ -95,12 +95,14 @@ type session struct {
 	ctx                             context.Context
 	cancel                          context.CancelFunc
 	backoff                         retry.Backoff
+	disconnectBackoff				retry.Backoff
 	resources                       sessionResources
 	latestSeqNumTaskManifest        *int64
 	doctor                          *doctor.Doctor
 	_heartbeatTimeout               time.Duration
 	_heartbeatJitter                time.Duration
 	_inactiveInstanceReconnectDelay time.Duration
+	connected						bool
 }
 
 // sessionResources defines the resource creator interface for starting
@@ -160,6 +162,8 @@ func NewSession(
 	resources := newSessionResources(credentialsProvider)
 	backoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
 		connectionBackoffJitter, connectionBackoffMultiplier)
+	disconnectBackoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
+		connectionBackoffJitter, connectionBackoffMultiplier)
 	derivedContext, cancel := context.WithCancel(ctx)
 
 	return &session{
@@ -177,6 +181,7 @@ func NewSession(
 		ctx:                             derivedContext,
 		cancel:                          cancel,
 		backoff:                         backoff,
+		disconnectBackoff:				 disconnectBackoff,
 		resources:                       resources,
 		latestSeqNumTaskManifest:        latestSeqNumTaskManifest,
 		doctor:                          doctor,
@@ -197,6 +202,7 @@ func (acsSession *session) Start() error {
 	// connectToACS channel is used to indicate the intent to connect to ACS
 	// It's processed by the select loop to connect to ACS
 	connectToACS := make(chan struct{}, 1)
+	acsSession.connected = false
 	// This is required to trigger the first connection to ACS. Subsequent
 	// connections are triggered by the handleACSError() method
 	connectToACS <- struct{}{}
@@ -205,6 +211,14 @@ func (acsSession *session) Start() error {
 		case <-connectToACS:
 			seelog.Debugf("Received connect to ACS message -RIYA")
 			// Start a session with ACS
+			if acsSession.connected = false {
+				reconnectDelay2 := acsSession.computeReconnectDelay2()
+				seelog.Infof("Attempting to connect to ACS: %s", reconnectDelay2.String())
+				waitComplete2 := acsSession.waitForDuration(reconnectDelay2)
+				if waitComplete2 {
+					seelog.Infof("wait complete, attempting to connect to ACS")
+					acsSession.connected = true;
+			}
 			acsError := acsSession.startSessionOnce()
 			select {
 			case <-acsSession.ctx.Done():
@@ -410,6 +424,10 @@ func (acsSession *session) computeReconnectDelay(isInactiveInstance bool) time.D
 	}
 
 	return acsSession.backoff.Duration()
+}
+
+func (acsSession *session) computeReconnectDelay2() time.Duration {
+	return acsSession.disconnectBackoff.Duration()
 }
 
 // waitForDuration waits for the specified duration of time. If the wait is interrupted,
