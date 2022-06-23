@@ -70,6 +70,7 @@ const (
 	// 1: default protocol version
 	// 2: ACS will proactively close the connection when heartbeat acks are missing
 	acsProtocolVersion = 2
+	defaultRotationInterval = time.Minute
 )
 
 // Session defines an interface for handler's long-lived connection with ACS.
@@ -95,7 +96,7 @@ type session struct {
 	ctx                             context.Context
 	cancel                          context.CancelFunc
 	backoff                         retry.Backoff
-	disconnectBackoff				retry.Backoff
+	RotationInterval				time.Duration
 	resources                       sessionResources
 	latestSeqNumTaskManifest        *int64
 	doctor                          *doctor.Doctor
@@ -162,8 +163,6 @@ func NewSession(
 	resources := newSessionResources(credentialsProvider)
 	backoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
 		connectionBackoffJitter, connectionBackoffMultiplier)
-	disconnectBackoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
-		connectionBackoffJitter, connectionBackoffMultiplier)
 	derivedContext, cancel := context.WithCancel(ctx)
 
 	return &session{
@@ -181,7 +180,7 @@ func NewSession(
 		ctx:                             derivedContext,
 		cancel:                          cancel,
 		backoff:                         backoff,
-		disconnectBackoff:				 disconnectBackoff,
+		RotationInterval:				 defaultRotationInterval
 		resources:                       resources,
 		latestSeqNumTaskManifest:        latestSeqNumTaskManifest,
 		doctor:                          doctor,
@@ -206,15 +205,13 @@ func (acsSession *session) Start() error {
 	// This is required to trigger the first connection to ACS. Subsequent
 	// connections are triggered by the handleACSError() method
 	connectToACS <- struct{}{}
-	for {
 		select {
 		case <-connectToACS:
 			seelog.Debugf("Received connect to ACS message -RIYA")
 			// Start a session with ACS
 			if acsSession.connected == false {
-				reconnectDelay2 := acsSession.computeReconnectDelay2()
-				seelog.Infof("Attempting to connect to ACS: %s", reconnectDelay2.String())
-				waitComplete2 := acsSession.waitForDuration(reconnectDelay2)
+				seelog.Infof("Attempting to connect to ACS: %s", RotationInterval.String())
+				waitComplete2 := acsSession.waitForDuration(RotationInterval)
 				if waitComplete2 {
 					seelog.Infof("wait complete, attempting to connect to ACS")
 					acsSession.connected = true;
@@ -427,9 +424,6 @@ func (acsSession *session) computeReconnectDelay(isInactiveInstance bool) time.D
 	return acsSession.backoff.Duration()
 }
 
-func (acsSession *session) computeReconnectDelay2() time.Duration {
-	return acsSession.disconnectBackoff.Duration()
-}
 
 // waitForDuration waits for the specified duration of time. If the wait is interrupted,
 // it returns a false value. Else, it returns true, indicating completion of wait time.
