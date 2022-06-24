@@ -1,0 +1,54 @@
+version: 0.2
+
+env:
+  git-credential-helper: yes
+  exported-variables:
+    - CODEBUILD_BUILD_ID
+    - ECS_AGENT_DEB
+    - ECS_AGENT_DEB_TAR
+
+phases:
+  install:
+    commands:
+      - architecture=""
+      # Same buildspec for different architectures - detect the architecture here and rename the artifacts accordingly
+      - |
+        case $(uname -m) in
+          x86_64)
+            architecture="amd64"
+          ;;
+          aarch64)
+            architecture="arm64"
+          ;;
+        esac
+
+  build:
+    commands:
+      - echo "Building agent deb"
+      - AGENT_VERSION=$(cat VERSION)
+      - ECS_AGENT_DEB="amazon-ecs-init_${AGENT_VERSION}-1_${architecture}.deb"
+      - ECS_AGENT_DEB_TAR="amazon-ecs-init_${AGENT_VERSION}-1.debian.tar.xz"
+      - echo $(pwd)
+
+      # Directory/GOPATH restructuring needed for CodePipeline
+      - cd ../..
+      - GITHUBUSERNAME=$(ls)
+      - mkdir -p src/github.com/
+      - mv $GITHUBUSERNAME src/github.com/aws
+      - export GOPATH=$GOPATH:$(pwd)
+      - cd src/github.com/aws/amazon-ecs-agent
+
+      # Build agent tars
+      - GO111MODULE=auto
+      - DEBIAN_FRONTEND=noninteractive
+
+      - apt-get update -y
+      - apt-get install -y make dpkg-dev devscripts debhelper golang
+      - which go
+      - go version
+      - make generic-deb-integrated
+
+artifacts:
+  files:
+    - $ECS_AGENT_DEB
+    - $ECS_AGENT_DEB_TAR
