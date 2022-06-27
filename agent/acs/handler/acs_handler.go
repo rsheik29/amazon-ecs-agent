@@ -164,7 +164,8 @@ func NewSession(
 	backoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
 		connectionBackoffJitter, connectionBackoffMultiplier)
 	derivedContext, cancel := context.WithCancel(ctx)
-
+	disconnectionTimer := nil
+	dsconnectionModeEnabled = false
 	return &session{
 		agentConfig:                     config,
 		deregisterInstanceEventStream:   deregisterInstanceEventStream,
@@ -187,8 +188,8 @@ func NewSession(
 		_heartbeatJitter:                heartbeatJitter,
 		_inactiveInstanceReconnectDelay: inactiveInstanceReconnectDelay,
 		//  (TODO: remove for config var)
-		disconnectionModeEnabled:		 disconnectionModeEnabled
-		disconnectionTimer: disconnectionTimer		
+		disconnectionModeEnabled:		 disconnectionModeEnabled,
+		disconnectionTimer: disconnectionTimer,
 	}
 }
 
@@ -267,7 +268,6 @@ func (acsSession *session) Start() error {
 					seelog.Info("Interrupted waiting for reconnect delay to elapse; Expect session to close")
 				}
 			}
-			}
 		case <-acsSession.ctx.Done():
 			// agent is shutting down, exiting cleanly
 			return nil
@@ -287,9 +287,8 @@ func (acsSession *session) checkDisconnectionTimer() bool {
 }
 // TODO: start timer using NewTimer (could also use AfterFunc but less sure about that)
 func (acsSession *session) startDisconnectionTimer() {
-	duration = time.Duration(time.Minute * 5)
-	session.disconnectionTimer := time.newTimer(duration)
-	return nil
+	session.disconnectionTimer := time.NewTimer(time.Duration(time.Minute * 5))
+
 }
 
 // startSessionOnce creates a session with ACS and handles requests using the passed
