@@ -145,6 +145,13 @@ var testConfig = &config.Config{
 	AcceptInsecureCert: true,
 }
 
+// TODO create new config where disconnectmode capable is ON
+//
+var testConfigDisconnect = &config.Config{
+	Cluster:            "someCluster",
+	AcceptInsecureCert: true,
+	DisconnectCapable:  true,
+}
 var testCreds = credentials.NewStaticCredentials("test-id", "test-secret", "test-token")
 
 type mockSessionResources struct {
@@ -409,6 +416,8 @@ func TestHandlerReconnectsWithBackoffOnNonEOFError(t *testing.T) {
 	mockWsClient.EXPECT().SetAnyRequestHandler(gomock.Any()).AnyTimes()
 	mockWsClient.EXPECT().AddRequestHandler(gomock.Any()).AnyTimes()
 	mockWsClient.EXPECT().Close().Return(nil).AnyTimes()
+	// ^^ initialize mock handler
+	// TODO manually enable disconnect capability
 	gomock.InOrder(
 		mockWsClient.EXPECT().Connect().Return(fmt.Errorf("not EOF")),
 		// The backoff.Duration() method is expected to be invoked when
@@ -422,8 +431,71 @@ func TestHandlerReconnectsWithBackoffOnNonEOFError(t *testing.T) {
 		mockBackoff.EXPECT().Reset().AnyTimes(),
 	)
 	acsSession := session{
-		containerInstanceARN:          "myArn",
-		credentialsProvider:           testCreds,
+		containerInstanceARN: "myArn",
+		credentialsProvider:  testCreds,
+		// TODO change testConfig to my own testconfig w disconnect capable on
+		agentConfig:                   testConfig,
+		taskEngine:                    taskEngine,
+		ecsClient:                     ecsClient,
+		deregisterInstanceEventStream: deregisterInstanceEventStream,
+		dataClient:                    data.NewNoopClient(),
+		taskHandler:                   taskHandler,
+		backoff:                       mockBackoff,
+		ctx:                           ctx,
+		cancel:                        cancel,
+		resources:                     &mockSessionResources{mockWsClient},
+		_heartbeatTimeout:             20 * time.Millisecond,
+		_heartbeatJitter:              10 * time.Millisecond,
+	}
+	go func() {
+		acsSession.Start()
+	}()
+
+	// Wait for context to be cancelled
+	select {
+	case <-ctx.Done():
+	}
+}
+
+func TestHandlerAttemptsReconnectionWithDisconnectCapability(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	taskEngine := mock_engine.NewMockTaskEngine(ctrl)
+	taskEngine.EXPECT().Version().Return("Docker: 1.5.0", nil).AnyTimes()
+
+	ecsClient := mock_api.NewMockECSClient(ctrl)
+	ecsClient.EXPECT().DiscoverPollEndpoint(gomock.Any()).Return(acsURL, nil).AnyTimes()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	taskHandler := eventhandler.NewTaskHandler(ctx, data.NewNoopClient(), nil, nil)
+
+	deregisterInstanceEventStream := eventstream.NewEventStream("DeregisterContainerInstance", ctx)
+	deregisterInstanceEventStream.StartListening()
+
+	mockBackoff := mock_retry.NewMockBackoff(ctrl)
+	mockWsClient := mock_wsclient.NewMockClientServer(ctrl)
+	mockWsClient.EXPECT().SetAnyRequestHandler(gomock.Any()).AnyTimes()
+	mockWsClient.EXPECT().AddRequestHandler(gomock.Any()).AnyTimes()
+	mockWsClient.EXPECT().Close().Return(nil).AnyTimes()
+	// ^^ initialize mock handler
+	// TODO manually enable disconnect capability
+	gomock.InOrder(
+		mockWsClient.EXPECT().Connect().Return(fmt.Errorf("not EOF")),
+		// The backoff.Duration() method is expected to be invoked when
+		// the connection is closed with a non-EOF error code to compute
+		// the backoff. Also, no calls to backoff.Reset() are expected
+		// in this code path.
+		mockBackoff.EXPECT().Duration().Return(time.Millisecond),
+		mockWsClient.EXPECT().Connect().Do(func() {
+			cancel()
+		}).Return(io.EOF),
+		mockBackoff.EXPECT().Reset().AnyTimes(),
+	)
+	acsSession := session{
+		containerInstanceARN: "myArn",
+		credentialsProvider:  testCreds,
+		// TODO change testConfig to my own testconfig w disconnect capable on
 		agentConfig:                   testConfig,
 		taskEngine:                    taskEngine,
 		ecsClient:                     ecsClient,

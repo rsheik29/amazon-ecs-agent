@@ -1,0 +1,2143 @@
+/usr/local/go/bin/go test -count=1 -v -cover -race -tags unit -coverprofile cover.out -timeout=60s ./agent/...
+=== RUN   TestMakeUnrecognizedRequest
+--- PASS: TestMakeUnrecognizedRequest (0.00s)
+=== RUN   TestWriteAckRequest
+--- PASS: TestWriteAckRequest (0.00s)
+=== RUN   TestPayloadHandlerCalled
+1656440897385211000 [Debug] ACS client starting websocket poll loop
+1656440897386488000 [Debug] Received message of type: PayloadMessage
+1656440897386817000 [Debug] Received message of type: PayloadMessage
+--- PASS: TestPayloadHandlerCalled (0.00s)
+=== RUN   TestRefreshCredentialsHandlerCalled
+1656440897387204000 [Debug] ACS client starting websocket poll loop
+1656440897388047000 [Debug] Received message of type: IAMRoleCredentialsMessage
+1656440897388291000 [Debug] Received message of type: IAMRoleCredentialsMessage
+--- PASS: TestRefreshCredentialsHandlerCalled (0.00s)
+=== RUN   TestClosingConnection
+--- PASS: TestClosingConnection (0.00s)
+=== RUN   TestConnect
+1656440897388951000 [Debug] ACS client starting websocket poll loop
+1656440897388983000 [Debug] Error getting message from ws backend: error: [EOF], messageType: [0] 
+1656440897392147000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63020"
+1656440897393329000 [Info] NO_PROXY set:169.254.169.254,169.254.170.2,
+1656440897422141000 [Debug] Established a Websocket connection to https://127.0.0.1:63020
+1656440897422569000 [Debug] ACS client starting websocket poll loop
+1656440897423576000 [Debug] Received message of type: PayloadMessage
+1656440897426215000 [Debug] Connection closed for a valid reason: websocket: close 1006 (abnormal closure): unexpected EOF
+--- PASS: TestConnect (0.04s)
+=== RUN   TestConnectClientError
+1656440897427292000 [Info] logger=structured msg="Establishing a Websocket connection" url="http://127.0.0.1:63022"
+--- PASS: TestConnectClientError (0.01s)
+=== RUN   TestAttachENIHandlerCalled
+--- PASS: TestAttachENIHandlerCalled (0.00s)
+1656440897438970000 [Debug] ACS client starting websocket poll loop
+1656440897439337000 [Debug] Received message of type: AttachTaskNetworkInterfacesMessage
+1656440897439579000 [Debug] Received message of type: AttachTaskNetworkInterfacesMessage
+=== RUN   TestAttachInstanceENIHandlerCalled
+1656440897440010000 [Debug] ACS client starting websocket poll loop
+1656440897440295000 [Debug] Received message of type: AttachInstanceNetworkInterfacesMessage
+1656440897440632000 [Debug] Received message of type: AttachInstanceNetworkInterfacesMessage
+--- PASS: TestAttachInstanceENIHandlerCalled (0.00s)
+=== RUN   TestInvalidInstanceException
+--- PASS: TestInvalidInstanceException (0.00s)
+=== RUN   TestInvalidClusterException
+--- PASS: TestInvalidClusterException (0.00s)
+=== RUN   TestServerException
+--- PASS: TestServerException (0.00s)
+=== RUN   TestGenericErrorConversion
+--- PASS: TestGenericErrorConversion (0.00s)
+=== RUN   TestSomeRandomTypeConversion
+--- PASS: TestSomeRandomTypeConversion (0.00s)
+=== RUN   TestBadlyTypedMessage
+--- PASS: TestBadlyTypedMessage (0.00s)
+PASS
+coverage: 94.4% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/acs/client	2.209s	coverage: 94.4% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/acs/handler [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/acs/update_handler [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/api [build failed]
+=== RUN   TestAppMeshFromACS
+--- PASS: TestAppMeshFromACS (0.00s)
+=== RUN   TestAppMeshFromACSContainsDefaultEgressIgnoredIP
+--- PASS: TestAppMeshFromACSContainsDefaultEgressIgnoredIP (0.00s)
+=== RUN   TestAppMeshFromACSNonAppMeshProxyInput
+--- PASS: TestAppMeshFromACSNonAppMeshProxyInput (0.00s)
+=== RUN   TestAppMeshEmptyAppPorts
+--- PASS: TestAppMeshEmptyAppPorts (0.00s)
+=== RUN   TestAppMeshEmptyIgnoredIPs
+--- PASS: TestAppMeshEmptyIgnoredIPs (0.00s)
+=== RUN   TestAppMeshEmptyIgnoredPorts
+--- PASS: TestAppMeshEmptyIgnoredPorts (0.00s)
+PASS
+coverage: 92.6% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/api/appmesh	0.614s	coverage: 92.6% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/api/container [build failed]
+=== RUN   TestShouldReportToBackend
+--- PASS: TestShouldReportToBackend (0.00s)
+=== RUN   TestBackendStatus
+--- PASS: TestBackendStatus (0.00s)
+=== RUN   TestUnmarshalContainerStatus
+--- PASS: TestUnmarshalContainerStatus (0.00s)
+=== RUN   TestHealthBackendStatus
+=== RUN   TestHealthBackendStatus/Status:_HEALTHY_BackendStatus:_HEALTHY
+=== RUN   TestHealthBackendStatus/Status:_UNHEALTHY_BackendStatus:_UNHEALTHY
+=== RUN   TestHealthBackendStatus/Status:_UNKNOWN_BackendStatus:_UNKNOWN
+--- PASS: TestHealthBackendStatus (0.00s)
+    --- PASS: TestHealthBackendStatus/Status:_HEALTHY_BackendStatus:_HEALTHY (0.00s)
+    --- PASS: TestHealthBackendStatus/Status:_UNHEALTHY_BackendStatus:_UNHEALTHY (0.00s)
+    --- PASS: TestHealthBackendStatus/Status:_UNKNOWN_BackendStatus:_UNKNOWN (0.00s)
+=== RUN   TestUnmarshalContainerHealthStatus
+=== RUN   TestUnmarshalContainerHealthStatus/Status:_UNKNOWN,_String_value:_"UNKNOWN"
+=== RUN   TestUnmarshalContainerHealthStatus/Status:_HEALTHY,_String_value:_"HEALTHY"
+=== RUN   TestUnmarshalContainerHealthStatus/Status:_UNHEALTHY,_String_value:_"UNHEALTHY"
+--- PASS: TestUnmarshalContainerHealthStatus (0.00s)
+    --- PASS: TestUnmarshalContainerHealthStatus/Status:_UNKNOWN,_String_value:_"UNKNOWN" (0.00s)
+    --- PASS: TestUnmarshalContainerHealthStatus/Status:_HEALTHY,_String_value:_"HEALTHY" (0.00s)
+    --- PASS: TestUnmarshalContainerHealthStatus/Status:_UNHEALTHY,_String_value:_"UNHEALTHY" (0.00s)
+=== RUN   TestTerminal
+--- PASS: TestTerminal (0.00s)
+=== RUN   TestIsRunning
+--- PASS: TestIsRunning (0.00s)
+=== RUN   TestShouldReportManagedAgentStatusToBackend
+--- PASS: TestShouldReportManagedAgentStatusToBackend (0.00s)
+=== RUN   TestManagedAgentBackendStatus
+--- PASS: TestManagedAgentBackendStatus (0.00s)
+=== RUN   TestUnmarshalManagedAgentStatus
+--- PASS: TestUnmarshalManagedAgentStatus (0.00s)
+PASS
+coverage: 55.7% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/api/container/status	0.485s	coverage: 55.7% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/api/ecsclient [build failed]
+=== RUN   TestIsStandardENI
+=== RUN   TestIsStandardENI/#00
+=== RUN   TestIsStandardENI/default
+=== RUN   TestIsStandardENI/vlan
+=== RUN   TestIsStandardENI/invalid
+--- PASS: TestIsStandardENI (0.00s)
+    --- PASS: TestIsStandardENI/#00 (0.00s)
+    --- PASS: TestIsStandardENI/default (0.00s)
+    --- PASS: TestIsStandardENI/vlan (0.00s)
+    --- PASS: TestIsStandardENI/invalid (0.00s)
+=== RUN   TestGetIPV4Addresses
+--- PASS: TestGetIPV4Addresses (0.00s)
+=== RUN   TestGetIPV6Addresses
+--- PASS: TestGetIPV6Addresses (0.00s)
+=== RUN   TestGetPrimaryIPv4Address
+--- PASS: TestGetPrimaryIPv4Address (0.00s)
+=== RUN   TestGetPrimaryIPv4AddressWithPrefixLength
+--- PASS: TestGetPrimaryIPv4AddressWithPrefixLength (0.00s)
+=== RUN   TestGetIPAddressesWithPrefixLength
+--- PASS: TestGetIPAddressesWithPrefixLength (0.00s)
+=== RUN   TestGetIPv4SubnetPrefixLength
+--- PASS: TestGetIPv4SubnetPrefixLength (0.00s)
+=== RUN   TestGetIPv4SubnetCIDRBlock
+--- PASS: TestGetIPv4SubnetCIDRBlock (0.00s)
+=== RUN   TestGetIPv6SubnetCIDRBlock
+--- PASS: TestGetIPv6SubnetCIDRBlock (0.00s)
+=== RUN   TestGetSubnetGatewayIPv4Address
+--- PASS: TestGetSubnetGatewayIPv4Address (0.00s)
+=== RUN   TestGetLinkNameSuccess
+--- PASS: TestGetLinkNameSuccess (0.00s)
+=== RUN   TestGetLinkNameFailure
+--- PASS: TestGetLinkNameFailure (0.00s)
+=== RUN   TestENIToString
+1656440897370895000 [Error] Failed to find link name: failed to find interfaces.
+--- PASS: TestENIToString (0.00s)
+=== RUN   TestENIFromACS
+--- PASS: TestENIFromACS (0.00s)
+=== RUN   TestValidateENIFromACS
+--- PASS: TestValidateENIFromACS (0.00s)
+=== RUN   TestInvalidENIInterfaceVlanPropertyMissing
+--- PASS: TestInvalidENIInterfaceVlanPropertyMissing (0.00s)
+=== RUN   TestInvalidENIInvalidInterfaceAssociationProtocol
+--- PASS: TestInvalidENIInvalidInterfaceAssociationProtocol (0.00s)
+=== RUN   TestInvalidSubnetGatewayAddress
+--- PASS: TestInvalidSubnetGatewayAddress (0.00s)
+=== RUN   TestMarshalUnmarshal
+--- PASS: TestMarshalUnmarshal (0.00s)
+=== RUN   TestMarshalUnmarshalWithAttachmentType
+--- PASS: TestMarshalUnmarshalWithAttachmentType (0.00s)
+=== RUN   TestStartTimerErrorWhenExpiresAtIsInThePast
+--- PASS: TestStartTimerErrorWhenExpiresAtIsInThePast (0.00s)
+=== RUN   TestHasExpired
+=== RUN   TestHasExpired/expiresAt_in_past_returns_true
+=== RUN   TestHasExpired/expiresAt_in_future_returns_false
+--- PASS: TestHasExpired (0.00s)
+    --- PASS: TestHasExpired/expiresAt_in_past_returns_true (0.00s)
+    --- PASS: TestHasExpired/expiresAt_in_future_returns_false (0.00s)
+=== RUN   TestInitialize
+1656440897374730000 [Info] logger=structured msg="Starting ENI ack timer" task="" duration="625.367ms" attachmentARN="att1" attachmentType="" attachmentSent=false mac="mac1" status="NONE" expiresAt="2022-06-28T11:28:18-07:00"
+--- PASS: TestInitialize (0.63s)
+=== RUN   TestInitializeExpired
+--- PASS: TestInitializeExpired (0.00s)
+=== RUN   TestInitializeExpiredButAlreadySent
+--- PASS: TestInitializeExpiredButAlreadySent (0.00s)
+=== RUN   TestStatusToString
+=== RUN   TestStatusToString/NONE
+=== RUN   TestStatusToString/ATTACHED
+=== RUN   TestStatusToString/DETACHED
+--- PASS: TestStatusToString (0.00s)
+    --- PASS: TestStatusToString/NONE (0.00s)
+    --- PASS: TestStatusToString/ATTACHED (0.00s)
+    --- PASS: TestStatusToString/DETACHED (0.00s)
+=== RUN   TestShouldSend
+=== RUN   TestShouldSend/NONE
+=== RUN   TestShouldSend/ATTACHED
+=== RUN   TestShouldSend/DETACHED
+--- PASS: TestShouldSend (0.00s)
+    --- PASS: TestShouldSend/NONE (0.00s)
+    --- PASS: TestShouldSend/ATTACHED (0.00s)
+    --- PASS: TestShouldSend/DETACHED (0.00s)
+PASS
+coverage: 82.6% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/api/eni	2.796s	coverage: 82.6% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/api/task [build failed]
+=== RUN   TestTaskStatus
+--- PASS: TestTaskStatus (0.00s)
+=== RUN   TestUnmarshalTaskStatus
+--- PASS: TestUnmarshalTaskStatus (0.00s)
+PASS
+coverage: 37.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/api/task/status	0.620s	coverage: 37.0% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/api/testutils [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/app [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/asm [build failed]
+=== RUN   TestLRUSimple
+--- PASS: TestLRUSimple (0.00s)
+=== RUN   TestLRUSetDelete
+--- PASS: TestLRUSetDelete (0.00s)
+=== RUN   TestLRUTTlPurge
+--- PASS: TestLRUTTlPurge (0.10s)
+=== RUN   TestLRUSizePurge
+--- PASS: TestLRUSizePurge (0.00s)
+=== RUN   TestTTLSimple
+--- PASS: TestTTLSimple (0.00s)
+=== RUN   TestTTLSetDelete
+--- PASS: TestTTLSetDelete (0.00s)
+=== RUN   TestTTLCache
+--- PASS: TestTTLCache (0.10s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/async	0.905s	coverage: 100.0% of statements
+=== RUN   TestBooleanDefaultTrue
+--- PASS: TestBooleanDefaultTrue (0.00s)
+=== RUN   TestBooleanDefaultTrueImplements
+--- PASS: TestBooleanDefaultTrueImplements (0.00s)
+=== RUN   TestBooleanDefaultTrueMarshal
+=== RUN   TestBooleanDefaultTrueMarshal/true
+=== RUN   TestBooleanDefaultTrueMarshal/false
+=== RUN   TestBooleanDefaultTrueMarshal/null
+--- PASS: TestBooleanDefaultTrueMarshal (0.00s)
+    --- PASS: TestBooleanDefaultTrueMarshal/true (0.00s)
+    --- PASS: TestBooleanDefaultTrueMarshal/false (0.00s)
+    --- PASS: TestBooleanDefaultTrueMarshal/null (0.00s)
+=== RUN   TestBooleanDefaultTrueUnmarshal
+=== RUN   TestBooleanDefaultTrueUnmarshal/true
+=== RUN   TestBooleanDefaultTrueUnmarshal/false
+=== RUN   TestBooleanDefaultTrueUnmarshal/null
+--- PASS: TestBooleanDefaultTrueUnmarshal (0.00s)
+    --- PASS: TestBooleanDefaultTrueUnmarshal/true (0.00s)
+    --- PASS: TestBooleanDefaultTrueUnmarshal/false (0.00s)
+    --- PASS: TestBooleanDefaultTrueUnmarshal/null (0.00s)
+=== RUN   TestMerge
+--- PASS: TestMerge (0.00s)
+=== RUN   TestBooleanMergeFalseNotOverridden
+--- PASS: TestBooleanMergeFalseNotOverridden (0.00s)
+=== RUN   TestBooleanMergeNotSetOverridden
+--- PASS: TestBooleanMergeNotSetOverridden (0.00s)
+=== RUN   TestBrokenEC2Metadata
+1656440897373168000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897373272000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897373865000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897373895000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897373981000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897373992000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897374000000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897374005000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897374016000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897374028000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897374033000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897374042000 [Debug] Environment variable empty: 
+1656440897374061000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897374253000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897375299000 [Debug] Non-json user data, skip merging into agent config: unexpected end of JSON input
+1656440897375598000 [Critical] Unable to communicate with EC2 Metadata service to infer region: err
+1656440897376681000 [Critical] Configuration key not set, key: AWSRegion
+--- PASS: TestBrokenEC2Metadata (0.00s)
+=== RUN   TestBrokenEC2MetadataEndpoint
+1656440897377699000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897377744000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897377749000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897377757000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897377763000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897377770000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897377775000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897377779000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897377787000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897377791000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897377796000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897377805000 [Debug] Environment variable empty: 
+1656440897377816000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897377823000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897388255000 [Debug] Non-json user data, skip merging into agent config: unexpected end of JSON input
+--- PASS: TestBrokenEC2MetadataEndpoint (0.01s)
+=== RUN   TestGetRegionWithNoIID
+1656440897389808000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897389850000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897389857000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897389868000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897389873000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897389878000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897389883000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897389887000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897389893000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897389897000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897389902000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897389911000 [Debug] Environment variable empty: 
+1656440897389922000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897389930000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestGetRegionWithNoIID (0.00s)
+=== RUN   TestEnvironmentConfig
+1656440897393224000 [Debug] Setting instance attribute my_attribute: testing
+1656440897393255000 [Debug] Setting instance tag my_tag: testing
+1656440897393357000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897393406000 [Debug] Environment variable empty: 
+--- PASS: TestEnvironmentConfig (0.00s)
+=== RUN   TestTrimWhitespaceWhenCreating
+1656440897393962000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897394504000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897394516000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897394528000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897394611000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897394708000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897394727000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897394739000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897394746000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897394831000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897394870000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897394909000 [Debug] Environment variable empty: 
+1656440897394941000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897394998000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897395390000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestTrimWhitespaceWhenCreating (0.00s)
+=== RUN   TestTrimWhitespace
+--- PASS: TestTrimWhitespace (0.00s)
+=== RUN   TestConfigBoolean
+1656440897396777000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897396859000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897396869000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897396876000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897396924000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897396931000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897397009000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897397020000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897397027000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897397069000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897397096000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897397106000 [Debug] Environment variable empty: 
+1656440897397158000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897397171000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897397503000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestConfigBoolean (0.00s)
+=== RUN   TestBadLoggingDriverSerialization
+1656440897398390000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897398461000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897398472000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897398481000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897398493000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897398501000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897398596000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897398662000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897398675000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897398681000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897398733000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897398748000 [Debug] Environment variable empty: 
+1656440897398793000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897398817000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestBadLoggingDriverSerialization (0.00s)
+=== RUN   TestBadAttributesSerialization
+1656440897398972000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897399141000 [Error] Invalid format for ECS_INSTANCE_ATTRIBUTES. Expected a json hash: invalid character 'T' looking for beginning of value
+1656440897399321000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+--- PASS: TestBadAttributesSerialization (0.00s)
+=== RUN   TestBadTagsSerialization
+1656440897399342000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897399423000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897399435000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897399440000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897399445000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897399451000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897399455000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897399462000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897399465000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897399470000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897399478000 [Debug] Environment variable empty: 
+1656440897399489000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897399496000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestBadTagsSerialization (0.00s)
+=== RUN   TestInvalidLoggingDriver
+1656440897399805000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897399833000 [Error] Invalid format for ECS_CONTAINER_INSTANCE_TAGS. Expected a json hash: invalid character 'T' looking for beginning of value
+1656440897399908000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897399917000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897399922000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897399929000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897399934000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897399938000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897399945000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897399949000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897399958000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+--- PASS: TestInvalidLoggingDriver (0.00s)
+1656440897399961000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897399965000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+=== RUN   TestAwsFirelensLoggingDriver
+1656440897399973000 [Debug] Environment variable empty: 
+1656440897399984000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897399992000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestAwsFirelensLoggingDriver (0.00s)
+=== RUN   TestDefaultPollMetricsWithoutECSDataDir
+1656440897401081000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897401167000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897401185000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897401218000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897401231000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897401294000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897401318000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897401355000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897401361000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897401396000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897401414000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897401439000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897401447000 [Debug] Environment variable empty: 
+1656440897401461000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897401469000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestDefaultPollMetricsWithoutECSDataDir (0.00s)
+=== RUN   TestDefaultCheckpointWithoutECSDataDir
+1656440897411523000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897411650000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897411671000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897411677000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897411686000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897411936000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897411945000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897411953000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897411957000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897411964000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897411969000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897411973000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897411984000 [Debug] Environment variable empty: 
+1656440897411998000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897412007000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestDefaultCheckpointWithoutECSDataDir (0.00s)
+=== RUN   TestDefaultCheckpointWithECSDataDir
+--- PASS: TestDefaultCheckpointWithECSDataDir (0.00s)
+=== RUN   TestCheckpointWithoutECSDataDir
+--- PASS: TestCheckpointWithoutECSDataDir (0.00s)
+1656440897412843000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897412946000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897412960000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897412966000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897412974000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897412979000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897412985000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897412992000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897412997000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897413009000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897413013000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897413016000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897413026000 [Debug] Environment variable empty: 
+1656440897413038000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897413047000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897413239000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897413304000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897413316000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897413322000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897413330000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897413335000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897413340000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897413346000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897413350000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897413356000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897413360000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897413365000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897413377000 [Debug] Environment variable empty: 
+1656440897413387000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897413394000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+=== RUN   TestInvalidFormatDockerStopTimeout
+1656440897413927000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897414036000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897414123000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897414137000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897414158000 [Warn] Could not parse duration value: invalid for Environment Variable ECS_CONTAINER_STOP_TIMEOUT : time: invalid duration "invalid"
+1656440897414176000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897414191000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897414273000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897414281000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897414289000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897414295000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897414490000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+--- PASS: TestInvalidFormatDockerStopTimeout (0.00s)
+1656440897414500000 [Debug] Environment variable empty: 
+=== RUN   TestZeroValueDockerStopTimeout
+1656440897414513000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897414519000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897414840000 [Warn] Unable to fetch user data: blackholed
+1656440897415657000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897415841000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897415935000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897415963000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897415977000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897415985000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+--- PASS: TestZeroValueDockerStopTimeout (0.00s)
+=== RUN   TestInvalidValueDockerStopTimeout
+1656440897415991000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897415995000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897416002000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897416006000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897416009000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897416018000 [Debug] Environment variable empty: 
+1656440897416029000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897416037000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897416321000 [Warn] Unable to fetch user data: blackholed
+1656440897417171000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897417259000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897417272000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897417276000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897417285000 [Warn] Discarded invalid value for docker stop timeout, parsed as: -10s
+1656440897417307000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897417313000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897417319000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897417327000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897417334000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897417339000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897417342000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897417349000 [Debug] Environment variable empty: 
+1656440897417360000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897417368000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestInvalidValueDockerStopTimeout (0.00s)
+1656440897417644000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestInvalidFormatContainerStartTimeout
+1656440897418433000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897418500000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897418512000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897418516000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897418524000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897418531000 [Warn] Could not parse duration value: invalid for Environment Variable ECS_CONTAINER_START_TIMEOUT : time: invalid duration "invalid"
+1656440897418541000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897418545000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897418550000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897418557000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897418694000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897418702000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897418711000 [Debug] Environment variable empty: 
+1656440897418726000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897418733000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897426372000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidFormatContainerStartTimeout (0.01s)
+=== RUN   TestInvalidFormatContainerCreateTimeout
+1656440897427199000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897427309000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897427323000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897427329000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897427342000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897427346000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897427356000 [Warn] Could not parse duration value: invalid for Environment Variable ECS_CONTAINER_CREATE_TIMEOUT : time: invalid duration "invalid"
+1656440897427367000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897427372000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897427378000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897427383000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897427387000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897427398000 [Debug] Environment variable empty: 
+1656440897427411000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897427418000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897427763000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidFormatContainerCreateTimeout (0.00s)
+=== RUN   TestInvalidFormatDockerInactivityTimeout
+1656440897429318000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897429419000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897429434000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897429439000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897429448000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897429452000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897429458000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897429466000 [Warn] Could not parse duration value: invalid for Environment Variable ECS_IMAGE_PULL_INACTIVITY_TIMEOUT : time: invalid duration "invalid"
+1656440897429479000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897429485000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897429490000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897429497000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897429506000 [Debug] Environment variable empty: 
+1656440897429517000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897429524000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897429803000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidFormatDockerInactivityTimeout (0.00s)
+=== RUN   TestTooSmallDockerInactivityTimeout
+1656440897430527000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897430598000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897430612000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897430617000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897430624000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897430629000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897430633000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897430640000 [Warn] Discarded invalid value for image pull inactivity timeout, parsed as: 5s
+1656440897430656000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897430664000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897430668000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897430673000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897430679000 [Debug] Environment variable empty: 
+1656440897430690000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897430697000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897430980000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestTooSmallDockerInactivityTimeout (0.00s)
+=== RUN   TestNegativeValueDockerInactivityTimeout
+1656440897431686000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897431760000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897431778000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897431783000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897431790000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897431795000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897431872000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897431890000 [Warn] Discarded invalid value for image pull inactivity timeout, parsed as: -10s
+1656440897431899000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897431906000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897431912000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897431916000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897432029000 [Debug] Environment variable empty: 
+1656440897432045000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897432054000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897432468000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestNegativeValueDockerInactivityTimeout (0.00s)
+=== RUN   TestZeroValueContainerStartTimeout
+1656440897433213000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897433299000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897433311000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897433319000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897433327000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897433334000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897433340000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897433344000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897433351000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897433355000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897433358000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897433369000 [Debug] Environment variable empty: 
+1656440897433380000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897433387000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897434015000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestZeroValueContainerStartTimeout (0.00s)
+=== RUN   TestZeroValueContainerCreateTimeout
+1656440897434931000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897435040000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897435053000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897435059000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897435069000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897435074000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897435083000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897435087000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897435094000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897435097000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897435101000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897435111000 [Debug] Environment variable empty: 
+1656440897435123000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897435132000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897435414000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestZeroValueContainerCreateTimeout (0.00s)
+=== RUN   TestInvalidValueContainerStartTimeout
+1656440897436144000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897436227000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897436238000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897436242000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897436250000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897436256000 [Warn] Discarded invalid value for container start timeout, parsed as: -10s
+1656440897436271000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897436276000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897436281000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897436287000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897436292000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897436296000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897436302000 [Debug] Environment variable empty: 
+1656440897436313000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897436324000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897436626000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidValueContainerStartTimeout (0.00s)
+=== RUN   TestInvalidValueContainerCreateTimeout
+--- PASS: TestInvalidValueContainerCreateTimeout (0.00s)
+1656440897437457000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897437540000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897437552000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897437557000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897437565000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897437569000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897437578000 [Warn] Discarded invalid value for container create timeout, parsed as: -10s
+1656440897437589000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897437594000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897437600000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897437605000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897437608000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897437619000 [Debug] Environment variable empty: 
+1656440897437630000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897437638000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897437919000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestZeroValueDockerPullInactivityTimeout
+1656440897438901000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897438983000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897438994000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897438999000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897439006000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897439011000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897439016000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897439021000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+--- PASS: TestZeroValueDockerPullInactivityTimeout (0.00s)
+1656440897439030000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897439036000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+=== RUN   TestInvalidValueDockerPullInactivityTimeout
+1656440897439042000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897439047000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897439054000 [Debug] Environment variable empty: 
+1656440897439065000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897439073000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897439358000 [Warn] Unable to fetch user data: blackholed
+1656440897440055000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897440159000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897440177000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897440182000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897440191000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897440196000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897440202000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897440207000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897440211000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897440220000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897440414000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897440427000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897440436000 [Debug] Environment variable empty: 
+1656440897440450000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897440459000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897440796000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidValueDockerPullInactivityTimeout (0.00s)
+=== RUN   TestInvalidValueMaxPollingMetricsWaitDuration
+1656440897441602000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897441698000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897441713000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897441718000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897441725000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897441730000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897441736000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897441741000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897441745000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897441755000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897441760000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897441765000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897441773000 [Debug] Environment variable empty: 
+1656440897441790000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897442094000 [Warn] Unable to fetch user data: blackholed
+1656440897442915000 [Warn] ECS_POLLING_METRICS_WAIT_DURATION parsed value (21s) is greater than the maximum of 20s. Setting polling interval to maximum.
+--- PASS: TestInvalidValueMaxPollingMetricsWaitDuration (0.00s)
+=== RUN   TestInvalidValueMinPollingMetricsWaitDuration
+1656440897453490000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897453612000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897453626000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897453632000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897453641000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897453646000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897453652000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897453657000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897453662000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897453670000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897453678000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897453684000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897453694000 [Debug] Environment variable empty: 
+1656440897453714000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897454045000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidValueMinPollingMetricsWaitDuration (0.00s)
+1656440897454661000 [Warn] ECS_POLLING_METRICS_WAIT_DURATION parsed value (1s) is less than the minimum of 5s. Setting polling interval to minimum.
+=== RUN   TestInvalidValuePollingMetricsWaitDuration
+1656440897454884000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897454964000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897454977000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897454982000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897454989000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897454994000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897455000000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897455007000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897455012000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897455018000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897455024000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897455030000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897455037000 [Debug] Environment variable empty: 
+1656440897455055000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897455366000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInvalidValuePollingMetricsWaitDuration (0.00s)
+=== RUN   TestInvalidFormatParseEnvVariableUint16
+--- PASS: TestInvalidFormatParseEnvVariableUint16 (0.00s)
+1656440897456232000 [Warn] Invalid format for "FOO" environment variable; expected unsigned integer. err strconv.ParseUint: parsing "foo": invalid syntax
+=== RUN   TestValidFormatParseEnvVariableUint16
+--- PASS: TestValidFormatParseEnvVariableUint16 (0.00s)
+=== RUN   TestInvalidFormatParseEnvVariableDuration
+--- PASS: TestInvalidFormatParseEnvVariableDuration (0.00s)
+1656440897456553000 [Warn] Could not parse duration value: foo for Environment Variable FOO : time: invalid duration "foo"
+=== RUN   TestValidForImagesCleanupExclusion
+--- PASS: TestValidForImagesCleanupExclusion (0.00s)
+=== RUN   TestValidFormatParseEnvVariableDuration
+--- PASS: TestValidFormatParseEnvVariableDuration (0.00s)
+=== RUN   TestInvalidTaskCleanupTimeoutOverridesToThreeHours
+1656440897456971000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897457151000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897457175000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897457185000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897457191000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897457196000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897457203000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897457208000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897457216000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897457220000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897457224000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897457234000 [Debug] Environment variable empty: 
+1656440897457245000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897457254000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897457594000 [Warn] Unable to fetch user data: blackholed
+1656440897458183000 [Warn] Invalid value for ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION, will be overridden with the default value: 3h0m0s. Parsed value: 1ms, minimum value: 1s.
+--- PASS: TestInvalidTaskCleanupTimeoutOverridesToThreeHours (0.00s)
+=== RUN   TestTaskCleanupTimeout
+1656440897458681000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897458766000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897458789000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897458799000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897458857000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897458885000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897469095000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897469156000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897469170000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897469176000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897469305000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897469330000 [Debug] Environment variable empty: 
+1656440897469437000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897469449000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897469806000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestTaskCleanupTimeout (0.01s)
+=== RUN   TestInvalidReservedMemoryOverridesToZero
+1656440897470610000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897470708000 [Warn] Invalid format for "ECS_RESERVED_MEMORY" environment variable; expected unsigned integer. err strconv.ParseUint: parsing "-1": invalid syntax
+1656440897470753000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897470788000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897470827000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897470845000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897470935000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897470942000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897470949000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897471013000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+--- PASS: TestInvalidReservedMemoryOverridesToZero (0.00s)
+=== RUN   TestReservedMemory
+--- PASS: TestReservedMemory (0.00s)
+=== RUN   TestTaskIAMRoleEnabled
+--- PASS: TestTaskIAMRoleEnabled (0.00s)
+=== RUN   TestDeleteNonECSImagesEnabled
+--- PASS: TestDeleteNonECSImagesEnabled (0.00s)
+=== RUN   TestTaskIAMRoleForHostNetworkEnabled
+1656440897471023000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897471029000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897471067000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897471078000 [Debug] Environment variable empty: 
+1656440897471092000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897471099000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897471442000 [Warn] Unable to fetch user data: blackholed
+1656440897472664000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897472771000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897472784000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897472796000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897472805000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897472818000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897472823000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897472829000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897472835000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897472841000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897472846000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897472851000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897472859000 [Debug] Environment variable empty: 
+1656440897472871000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897472879000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897473194000 [Warn] Unable to fetch user data: blackholed
+1656440897474410000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897475662000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897475685000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897475691000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897475702000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897475708000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897475714000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897475719000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897475723000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897475731000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897475737000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897475743000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897475752000 [Debug] Environment variable empty: 
+1656440897475763000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897475771000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897476675000 [Warn] Unable to fetch user data: blackholed
+1656440897477513000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897477608000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897477621000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897477632000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897477644000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897477650000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897477658000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897477666000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897477671000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897477678000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897477682000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897477687000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897477697000 [Debug] Environment variable empty: 
+1656440897477709000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897477717000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897478011000 [Warn] Unable to fetch user data: blackholed
+1656440897478730000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897478799000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897478811000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897478816000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897478824000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897478829000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897478836000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897478841000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897478845000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897478852000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897478856000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897478861000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+--- PASS: TestTaskIAMRoleForHostNetworkEnabled (0.01s)
+1656440897478869000 [Debug] Environment variable empty: 
+1656440897478880000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897478888000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+=== RUN   TestCredentialsAuditLogFile
+1656440897479256000 [Warn] Unable to fetch user data: blackholed
+1656440897487993000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897488122000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897488135000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897488142000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897488152000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897488160000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897488172000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897488178000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897488183000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897488190000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897488194000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897488201000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897488212000 [Debug] Environment variable empty: 
+1656440897488226000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897488233000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897489258000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestCredentialsAuditLogFile (0.00s)
+=== RUN   TestCredentialsAuditLogDisabled
+1656440897490871000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897490969000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897491010000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897491049000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897491062000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897491438000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897491473000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897491504000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897491512000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897491522000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897491526000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897491538000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897491546000 [Debug] Environment variable empty: 
+1656440897491559000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897491567000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897495020000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestCredentialsAuditLogDisabled (0.01s)
+=== RUN   TestImageCleanupMinimumInterval
+1656440897496117000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897496236000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897496260000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897496272000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897496282000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897496288000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897496293000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897496301000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897496306000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897496356000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897496363000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897496378000 [Debug] Environment variable empty: 
+1656440897496397000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897496406000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897496994000 [Warn] Unable to fetch user data: blackholed
+1656440897497605000 [Warn] Invalid value for ECS_IMAGE_CLEANUP_INTERVAL, will be overridden with the default value: 30m0s. Parsed value: 1m0s, minimum value: 10m0s.
+--- PASS: TestImageCleanupMinimumInterval (0.00s)
+=== RUN   TestImageCleanupMinimumNumImagesToDeletePerCycle
+1656440897497837000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897497935000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897497955000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897497961000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897498139000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897498145000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897498152000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897498462000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897498474000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897498483000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897498487000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897498493000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897498502000 [Debug] Environment variable empty: 
+1656440897498515000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897498792000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897499169000 [Warn] Unable to fetch user data: blackholed
+1656440897500329000 [Warn] Invalid value for number of images to delete for image cleanup, will be overridden with the default value: 3600000000000. Parsed value: -1, minimum value: 1.
+--- PASS: TestImageCleanupMinimumNumImagesToDeletePerCycle (0.00s)
+=== RUN   TestInvalidImagePullBehavior
+1656440897501419000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897501568000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897501584000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897501590000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897501603000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897501608000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897501615000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897501621000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+--- PASS: TestInvalidImagePullBehavior (0.00s)
+=== RUN   TestSharedVolumeMatchFullConfigEnabled
+1656440897501625000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897501633000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897501636000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897501643000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897501652000 [Debug] Environment variable empty: 
+1656440897501669000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897501677000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897502004000 [Warn] Unable to fetch user data: blackholed
+1656440897502797000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897503003000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897503031000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897503038000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897503047000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897503053000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897503059000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897503064000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897503070000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897503077000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897503081000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897503087000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897503095000 [Debug] Environment variable empty: 
+1656440897503109000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897503117000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897503466000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestSharedVolumeMatchFullConfigEnabled (0.00s)
+=== RUN   TestEnableRuntimeStatsConfigEnabled
+1656440897504257000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897504340000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897504354000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897504422000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897504441000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897504493000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897504540000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897504548000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897504553000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897504560000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897504564000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897504571000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897504579000 [Debug] Environment variable empty: 
+1656440897504591000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897504599000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897504934000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestEnableRuntimeStatsConfigEnabled (0.00s)
+=== RUN   TestParseImagePullBehavior
+=== RUN   TestParseImagePullBehavior/default_agent_behavior
+=== RUN   TestParseImagePullBehavior/always_agent_behavior
+=== RUN   TestParseImagePullBehavior/once_agent_behavior
+=== RUN   TestParseImagePullBehavior/prefer-cached_agent_behavior
+=== RUN   TestParseImagePullBehavior/invalid_agent_behavior
+--- PASS: TestParseImagePullBehavior (0.00s)
+    --- PASS: TestParseImagePullBehavior/default_agent_behavior (0.00s)
+    --- PASS: TestParseImagePullBehavior/always_agent_behavior (0.00s)
+    --- PASS: TestParseImagePullBehavior/once_agent_behavior (0.00s)
+    --- PASS: TestParseImagePullBehavior/prefer-cached_agent_behavior (0.00s)
+    --- PASS: TestParseImagePullBehavior/invalid_agent_behavior (0.00s)
+=== RUN   TestTaskResourceLimitsOverride
+1656440897506845000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897506957000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897506977000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897506983000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897506994000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897507073000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897512374000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897512479000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897512499000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897512520000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897512565000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897512589000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897512613000 [Debug] Environment variable empty: 
+1656440897512648000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897512668000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897513164000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestTaskResourceLimitsOverride (0.01s)
+=== RUN   TestAWSVPCBlockInstanceMetadata
+1656440897514206000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897514322000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897514336000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897514341000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897514350000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897514355000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897514360000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897514365000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897514369000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897514376000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897514379000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897514384000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897514393000 [Debug] Environment variable empty: 
+1656440897514405000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897514413000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897514707000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestAWSVPCBlockInstanceMetadata (0.00s)
+=== RUN   TestInvalidAWSVPCAdditionalLocalRoutes
+--- PASS: TestInvalidAWSVPCAdditionalLocalRoutes (0.00s)
+=== RUN   TestAWSLogsExecutionRole
+1656440897515707000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+--- PASS: TestAWSLogsExecutionRole (0.00s)
+1656440897515905000 [Error] Invalid format for ECS_AWSVPC_ADDITIONAL_LOCAL_ROUTES, expected a json array of CIDRs: invalid CIDR address: 300.300.300.300/64
+1656440897516035000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+=== RUN   TestTaskMetadataRPSLimits
+1656440897516067000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897516079000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897516100000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897516113000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+=== RUN   TestTaskMetadataRPSLimits/negative_limit_values
+1656440897516125000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897516141000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897516154000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897516171000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897516180000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897516193000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897516214000 [Debug] Environment variable empty: 
+1656440897516244000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897516262000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897516527000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897516586000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897516971000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897516989000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897516999000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897517005000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897517010000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897517016000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897517021000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897517028000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897517031000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897517037000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897517049000 [Debug] Environment variable empty: 
+1656440897517063000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897517070000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897517329000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897518492000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897518770000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897518838000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897518851000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897518856000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897518862000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897518867000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897518873000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897518877000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897518880000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897518889000 [Debug] Environment variable empty: 
+1656440897518903000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897518910000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897519225000 [Warn] Unable to fetch user data: blackholed
+1656440897519972000 [Warn] Invalid values for rate limits, will be overridden with default values: 40,60.
+=== RUN   TestTaskMetadataRPSLimits/negative_limit,valid_burst
+1656440897520285000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897520300000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897520307000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897520315000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897520322000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897520327000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897520334000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897520339000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897520345000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897520349000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897520353000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897520362000 [Debug] Environment variable empty: 
+1656440897520375000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897520383000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897520673000 [Warn] Unable to fetch user data: blackholed
+1656440897521452000 [Warn] Invalid values for rate limits, will be overridden with default values: 40,60.
+=== RUN   TestTaskMetadataRPSLimits/missing_limit,valid_burst
+1656440897521704000 [Warn] Invalid format for "ECS_TASK_METADATA_RPS_LIMIT", expected integer for steady state rate: strconv.Atoi: parsing "": invalid syntax
+1656440897521780000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897521831000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897521840000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897521851000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897521989000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897522019000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897522037000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897522049000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897522065000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897522074000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897522401000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897522440000 [Debug] Environment variable empty: 
+1656440897522459000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897522525000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897522827000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestTaskMetadataRPSLimits/valid_limit,missing_burst
+1656440897523618000 [Warn] Invalid format for "ECS_TASK_METADATA_RPS_LIMIT", expected integer for burst rate: strconv.Atoi: parsing "": invalid syntax
+1656440897523748000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897523763000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897523769000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897523779000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897523784000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897523789000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897523795000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897523799000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897523805000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897523808000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897523814000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897523822000 [Debug] Environment variable empty: 
+1656440897523835000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897523842000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897524121000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestTaskMetadataRPSLimits/empty_variable
+1656440897525026000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897525074000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897525084000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897525142000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897525180000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897525188000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897525195000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897525201000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897525205000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897525302000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897525307000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897525311000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897525321000 [Debug] Environment variable empty: 
+1656440897525403000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897525412000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897525701000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestTaskMetadataRPSLimits/missing_burst
+1656440897526515000 [Warn] Invalid format for "ECS_TASK_METADATA_RPS_LIMIT", expected: "rateLimit,burst"
+1656440897526583000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897526592000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897526597000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897526606000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897526611000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897526710000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897526718000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897526723000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897526729000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897526733000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897526737000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897526746000 [Debug] Environment variable empty: 
+1656440897526760000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897526768000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897527141000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestTaskMetadataRPSLimits/more_than_expected_values
+1656440897528440000 [Warn] Invalid format for "ECS_TASK_METADATA_RPS_LIMIT", expected: "rateLimit,burst"
+1656440897528494000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897528506000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897528511000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897528520000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897528526000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897528531000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897528537000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897528541000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897528548000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897528551000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897528556000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897528565000 [Debug] Environment variable empty: 
+1656440897528579000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897528587000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897528888000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestTaskMetadataRPSLimits/values_with_spaces
+1656440897529903000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897529924000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897529959000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897529993000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897530002000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897530007000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897530013000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897530019000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897530025000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897530029000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897530032000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897530041000 [Debug] Environment variable empty: 
+1656440897530054000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897530061000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897530361000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestTaskMetadataRPSLimits (0.01s)
+    --- PASS: TestTaskMetadataRPSLimits/negative_limit_values (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/negative_limit,valid_burst (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/missing_limit,valid_burst (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/valid_limit,missing_burst (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/empty_variable (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/missing_burst (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/more_than_expected_values (0.00s)
+    --- PASS: TestTaskMetadataRPSLimits/values_with_spaces (0.00s)
+=== RUN   TestUserDataConfig
+=== RUN   TestUserDataConfig/successful_consume_userdata_config
+=== RUN   TestUserDataConfig/returns_errors_retrieving_ec2_userdata
+1656440897531611000 [Warn] Unable to fetch user data: failed to get userdata
+=== RUN   TestUserDataConfig/returns_error,_failed_to_parse_json
+1656440897531736000 [Debug] Non-json user data, skip merging into agent config: invalid character '{' looking for beginning of object key string
+--- PASS: TestUserDataConfig (0.00s)
+    --- PASS: TestUserDataConfig/successful_consume_userdata_config (0.00s)
+    --- PASS: TestUserDataConfig/returns_errors_retrieving_ec2_userdata (0.00s)
+    --- PASS: TestUserDataConfig/returns_error,_failed_to_parse_json (0.00s)
+=== RUN   TestContainerInstancePropagateTagsFrom
+=== RUN   TestContainerInstancePropagateTagsFrom/none_container_instance_propagate_tags
+1656440897531920000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897532004000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897532020000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897532026000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897532035000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897532096000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897532105000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897532112000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897532116000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897532123000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897532127000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897532131000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897532139000 [Debug] Environment variable empty: 
+1656440897532152000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897532160000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897532473000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestContainerInstancePropagateTagsFrom/ec2_instance_container_instance_propagate_tags
+1656440897534061000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897534112000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897534230000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897534236000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897534247000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897534340000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897534398000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897534447000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897534454000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897534464000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897534468000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897534472000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897534584000 [Debug] Environment variable empty: 
+1656440897534606000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897534658000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897534986000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestContainerInstancePropagateTagsFrom/invalid_container_instance_propagate_tags
+1656440897535735000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897535784000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897535795000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897535799000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897535809000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897535814000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897535818000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897535824000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897535828000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897535834000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897535837000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897535842000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897535850000 [Debug] Environment variable empty: 
+1656440897535863000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897535871000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897536151000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestContainerInstancePropagateTagsFrom (0.00s)
+    --- PASS: TestContainerInstancePropagateTagsFrom/none_container_instance_propagate_tags (0.00s)
+    --- PASS: TestContainerInstancePropagateTagsFrom/ec2_instance_container_instance_propagate_tags (0.00s)
+    --- PASS: TestContainerInstancePropagateTagsFrom/invalid_container_instance_propagate_tags (0.00s)
+=== RUN   TestGPUSupportEnabled
+1656440897537393000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897537861000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897537969000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897537985000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897538009000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897538023000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897538045000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897538078000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897538261000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897538314000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897538462000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897538507000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897538563000 [Debug] Environment variable empty: 
+1656440897538584000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897538593000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897539345000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestGPUSupportEnabled (0.00s)
+=== RUN   TestInferentiaSupportEnabled
+1656440897540230000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897540294000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897540372000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897540381000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897540390000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897540395000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897540400000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897540409000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897540509000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897540521000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897540525000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897540528000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897540537000 [Debug] Environment variable empty: 
+1656440897540551000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897540559000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897540965000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestInferentiaSupportEnabled (0.00s)
+=== RUN   TestTaskMetadataAZDisabled
+1656440897541884000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897541940000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897541951000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897541957000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897541966000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897541971000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897541978000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897541986000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897541991000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897541998000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897542001000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897542005000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897542014000 [Debug] Environment variable empty: 
+1656440897542028000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897542036000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestTaskMetadataAZDisabled (0.00s)
+=== RUN   TestExternalConfig
+1656440897542347000 [Warn] Unable to fetch user data: blackholed
+1656440897543365000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897543406000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897543416000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897543420000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897543429000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897543434000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897543440000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897543445000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897543449000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897543455000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897543459000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897543462000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897543470000 [Debug] Environment variable empty: 
+1656440897543482000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897543489000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897543755000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestExternalConfig (0.00s)
+=== RUN   TestExternalConfigMissingRegion
+1656440897544493000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897544537000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897544548000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897544604000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897544645000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897544676000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897544686000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897544692000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+--- PASS: TestExternalConfigMissingRegion (0.00s)
+1656440897544697000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897546896000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897546920000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+=== RUN   TestConfigDefault
+1656440897546931000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897546957000 [Debug] Environment variable empty: 
+1656440897546995000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897547012000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897547620000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897547751000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897547763000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897547768000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897547779000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897547784000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897547788000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897547793000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897547797000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897547803000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897547807000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897547810000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897547818000 [Debug] Environment variable empty: 
+1656440897547832000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897547839000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+--- PASS: TestConfigDefault (0.00s)
+=== RUN   TestConfigFromFile
+1656440897548142000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestConfigFromFile (0.00s)
+=== RUN   TestDockerAuthMergeFromFile
+1656440897551430000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897551487000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897551499000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897551505000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897551514000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897551519000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897551523000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897551529000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897551533000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897551539000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897551543000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897551546000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897551556000 [Debug] Environment variable empty: 
+1656440897551569000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897551575000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897552569000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestDockerAuthMergeFromFile (0.00s)
+=== RUN   TestBadFileContent
+1656440897554166000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897554221000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897554460000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897554530000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897555116000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897555133000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897555147000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897555161000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897555172000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897555186000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897555195000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897555209000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897555231000 [Debug] Environment variable empty: 
+1656440897555264000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897555281000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897555492000 [Critical] Error reading cfg json data, err invalid CIDR address: 300.300.300.300/32
+1656440897556147000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestBadFileContent (0.00s)
+=== RUN   TestPrometheusMetricsPlatformOverrides
+1656440897557324000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897557377000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897557389000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897557395000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897557443000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897557458000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897557464000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897557473000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897557599000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897557609000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897557613000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897557617000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897557625000 [Debug] Environment variable empty: 
+1656440897557640000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897557647000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897557965000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestPrometheusMetricsPlatformOverrides (0.00s)
+=== RUN   TestENITrunkingEnabled
+1656440897558820000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897558867000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897558877000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897558881000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897558891000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897558895000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+--- PASS: TestENITrunkingEnabled (0.00s)
+=== RUN   TestENITrunkingDisabled
+1656440897558900000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897558906000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897558910000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897558915000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897558919000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897558922000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897558930000 [Debug] Environment variable empty: 
+1656440897558940000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897558947000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897559223000 [Warn] Unable to fetch user data: blackholed
+1656440897559975000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897560169000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897560187000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897560192000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897560203000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897560209000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897560213000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897560218000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897560224000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897560231000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897560235000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897560239000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897560247000 [Debug] Environment variable empty: 
+1656440897560259000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897560266000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897560555000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestENITrunkingDisabled (0.01s)
+=== RUN   TestEmptyNvidiaRuntime
+1656440897566609000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+--- PASS: TestEmptyNvidiaRuntime (0.00s)
+=== RUN   TestCPUPeriodSettings
+=== RUN   TestCPUPeriodSettings/OverrideDefaultCPUPeriod
+1656440897566869000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897566888000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897566896000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897566905000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897566910000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897566915000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897566921000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897566925000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897566931000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897566935000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897566938000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897566947000 [Debug] Environment variable empty: 
+1656440897566961000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897566967000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897567273000 [Warn] Unable to fetch user data: blackholed
+1656440897568099000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897568132000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897568142000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897568147000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897568155000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897568164000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897568168000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897568173000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897568177000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897568183000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897568187000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897568191000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897568198000 [Debug] Environment variable empty: 
+=== RUN   TestCPUPeriodSettings/DefaultCPUPeriod
+1656440897568210000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897568485000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestCPUPeriodSettings/TestCPUPeriodUpperBoundLimit
+1656440897569599000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897569644000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897569656000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897569660000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897569668000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897569673000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897569678000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897569683000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897569687000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897569693000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897569696000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897569700000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897569707000 [Debug] Environment variable empty: 
+1656440897569719000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897569726000 [Debug] Environment variable empty: ECS_CGROUP_CPU_PERIOD
+1656440897569992000 [Warn] Unable to fetch user data: blackholed
+1656440897570713000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897570749000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897570759000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897570763000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897570770000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897570775000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897570779000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897570784000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897570788000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897570794000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897570798000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897570801000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897570808000 [Debug] Environment variable empty: 
+1656440897570819000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897570827000 [Warn] CPU Period duration value: 110ms for Environment Variable ECS_CGROUP_CPU_PERIOD is not within [8ms, 100ms], using default value instead
+1656440897571082000 [Warn] Unable to fetch user data: blackholed
+=== RUN   TestCPUPeriodSettings/TestCPUPeriodLowerBoundLimit
+1656440897574106000 [Debug] Environment variable empty: ECS_TASK_METADATA_RPS_LIMIT
+1656440897574174000 [Warn] Invalid format for "ECS_AVAILABLE_LOGGING_DRIVERS" environment variable; expected a JSON array like ["json-file","syslog"]. err unexpected EOF
+1656440897574187000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION
+1656440897574192000 [Debug] Environment variable empty: ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION_JITTER
+1656440897574201000 [Debug] Environment variable empty: ECS_CONTAINER_STOP_TIMEOUT
+1656440897574206000 [Debug] Environment variable empty: ECS_CONTAINER_START_TIMEOUT
+1656440897574211000 [Debug] Environment variable empty: ECS_CONTAINER_CREATE_TIMEOUT
+1656440897574216000 [Debug] Environment variable empty: ECS_IMAGE_PULL_INACTIVITY_TIMEOUT
+1656440897574220000 [Debug] Environment variable empty: ECS_IMAGE_PULL_TIMEOUT
+1656440897574226000 [Debug] Environment variable empty: ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897574230000 [Debug] Environment variable empty: NON_ECS_IMAGE_MINIMUM_CLEANUP_AGE
+1656440897574233000 [Debug] Environment variable empty: ECS_IMAGE_CLEANUP_INTERVAL
+1656440897574242000 [Debug] Environment variable empty: 
+1656440897574256000 [Debug] Environment variable empty: ECS_POLLING_METRICS_WAIT_DURATION
+1656440897574265000 [Warn] CPU Period duration value: 7ms for Environment Variable ECS_CGROUP_CPU_PERIOD is not within [8ms, 100ms], using default value instead
+1656440897574561000 [Warn] Unable to fetch user data: blackholed
+--- PASS: TestCPUPeriodSettings (0.01s)
+    --- PASS: TestCPUPeriodSettings/OverrideDefaultCPUPeriod (0.00s)
+    --- PASS: TestCPUPeriodSettings/DefaultCPUPeriod (0.00s)
+    --- PASS: TestCPUPeriodSettings/TestCPUPeriodUpperBoundLimit (0.00s)
+    --- PASS: TestCPUPeriodSettings/TestCPUPeriodLowerBoundLimit (0.00s)
+=== RUN   TestSensitiveRawMessageImplements
+--- PASS: TestSensitiveRawMessageImplements (0.00s)
+=== RUN   TestSensitiveRawMessage
+--- PASS: TestSensitiveRawMessage (0.00s)
+=== RUN   TestEmptySensitiveRawMessage
+--- PASS: TestEmptySensitiveRawMessage (0.00s)
+PASS
+coverage: 89.3% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/config	2.383s	coverage: 89.3% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/containermetadata [build failed]
+=== RUN   TestIAMRoleCredentialsFromACS
+--- PASS: TestIAMRoleCredentialsFromACS (0.00s)
+=== RUN   TestGetTaskCredentialsUnknownId
+--- PASS: TestGetTaskCredentialsUnknownId (0.00s)
+=== RUN   TestSetTaskCredentialsEmptyTaskCredentials
+--- PASS: TestSetTaskCredentialsEmptyTaskCredentials (0.00s)
+=== RUN   TestSetTaskCredentialsNoCredentialsId
+--- PASS: TestSetTaskCredentialsNoCredentialsId (0.00s)
+=== RUN   TestSetTaskCredentialsNoTaskArn
+--- PASS: TestSetTaskCredentialsNoTaskArn (0.00s)
+=== RUN   TestSetAndGetTaskCredentialsHappyPath
+--- PASS: TestSetAndGetTaskCredentialsHappyPath (0.00s)
+=== RUN   TestGenerateCredentialsEndpointRelativeURI
+--- PASS: TestGenerateCredentialsEndpointRelativeURI (0.00s)
+=== RUN   TestRemoveExistingCredentials
+--- PASS: TestRemoveExistingCredentials (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/credentials	0.864s	coverage: 100.0% of statements
+=== RUN   TestGetCredentials
+    require.go:919: 
+        	Error Trace:	instancecreds_test.go:30
+        	Error:      	Expected value not to be nil.
+        	Test:       	TestGetCredentials
+--- FAIL: TestGetCredentials (0.00s)
+=== RUN   TestGetCredentials_EnvVars
+    require.go:919: 
+        	Error Trace:	instancecreds_test.go:48
+        	Error:      	Expected value not to be nil.
+        	Test:       	TestGetCredentials_EnvVars
+--- FAIL: TestGetCredentials_EnvVars (0.00s)
+=== RUN   TestGetCredentials_SharedCredentialsFile
+    require.go:919: 
+        	Error Trace:	instancecreds_test.go:85
+        	Error:      	Expected value not to be nil.
+        	Test:       	TestGetCredentials_SharedCredentialsFile
+--- FAIL: TestGetCredentials_SharedCredentialsFile (0.00s)
+FAIL
+coverage: 100.0% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/credentials/instancecreds	0.845s
+=== RUN   TestNewRotatingSharedCredentialsProvider
+--- PASS: TestNewRotatingSharedCredentialsProvider (0.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_RetrieveFail_BadPath
+--- PASS: TestRotatingSharedCredentialsProvider_RetrieveFail_BadPath (0.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_RetrieveFail_BadProfile
+--- PASS: TestRotatingSharedCredentialsProvider_RetrieveFail_BadProfile (0.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_Retrieve
+1656440895550295000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials3763436425. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXXEYID
+--- PASS: TestRotatingSharedCredentialsProvider_Retrieve (0.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_Retrieve_ShortSecrets
+1656440895550917000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials1355576470. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXX
+--- PASS: TestRotatingSharedCredentialsProvider_Retrieve_ShortSecrets (0.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_RetrieveAndRefresh
+1656440895551450000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials98178445. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXXYID1
+1656440896554199000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials98178445. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXXYID2
+--- PASS: TestRotatingSharedCredentialsProvider_RetrieveAndRefresh (1.00s)
+=== RUN   TestRotatingSharedCredentialsProvider_CredentialsCaching
+1656440896557686000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials3244674325. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXXYID1
+1656440896558828000 [Info] Successfully got instance credentials from file /var/folders/cn/sw5rt7vj1nd1_b5bjhf0kpvr0000gr/T/credentials3244674325. Provider: RotatingSharedCredentialsProvider. Access Key ID XXXXYID2
+--- PASS: TestRotatingSharedCredentialsProvider_CredentialsCaching (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/credentials/providers	1.692s	coverage: 100.0% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/data [build failed]
+=== RUN   TestParseDockerVersions
+--- PASS: TestParseDockerVersions (0.00s)
+=== RUN   TestDockerVersionMatches
+--- PASS: TestDockerVersionMatches (0.00s)
+PASS
+coverage: 80.4% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/dockerclient	0.395s	coverage: 80.4% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/dockerclient/dockerapi [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/dockerclient/dockerauth [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/dockerclient/sdkclientfactory [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/doctor [build failed]
+=== RUN   TestCreateTags
+--- PASS: TestCreateTags (0.00s)
+=== RUN   TestDescribeECSTagsForInstance
+--- PASS: TestDescribeECSTagsForInstance (0.00s)
+=== RUN   TestDefaultCredentials
+--- PASS: TestDefaultCredentials (0.00s)
+=== RUN   TestGetInstanceIdentityDoc
+--- PASS: TestGetInstanceIdentityDoc (0.00s)
+=== RUN   TestErrorPropogatesUp
+--- PASS: TestErrorPropogatesUp (0.00s)
+=== RUN   TestPrimaryMAC
+--- PASS: TestPrimaryMAC (0.00s)
+=== RUN   TestAllENIMacs
+--- PASS: TestAllENIMacs (0.00s)
+=== RUN   TestVPCID
+--- PASS: TestVPCID (0.00s)
+=== RUN   TestSubnetID
+--- PASS: TestSubnetID (0.00s)
+=== RUN   TestPrivateIPv4Address
+--- PASS: TestPrivateIPv4Address (0.00s)
+=== RUN   TestPublicIPv4Address
+--- PASS: TestPublicIPv4Address (0.00s)
+=== RUN   TestSpotInstanceAction
+--- PASS: TestSpotInstanceAction (0.00s)
+=== RUN   TestSpotInstanceActionError
+--- PASS: TestSpotInstanceActionError (0.00s)
+PASS
+coverage: 52.2% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/ec2	1.761s	coverage: 52.2% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/ecr [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/ecscni [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/engine [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/engine/dependencygraph [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/engine/dockerstate [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/engine/dockerstate/testutils [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/engine/execcmd [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/eni/pause [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/eni/watcher [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/eventhandler [build failed]
+=== RUN   TestSubscribe
+1656440897562931000 [Info] Event stream TestSubscribe start listening...
+--- PASS: TestSubscribe (0.00s)
+=== RUN   TestUnsubscribe
+1656440897563190000 [Debug] Event stream TestSubscribe received events, broadcasting to listeners...
+1656440897564138000 [Info] Event stream TestUnsubscribe start listening...
+1656440897564412000 [Debug] Event stream TestUnsubscribe received events, broadcasting to listeners...
+1656440897564583000 [Debug] Unsubscribing event handler listener1 from event stream TestUnsubscribe
+1656440897564610000 [Debug] Event stream TestUnsubscribe received events, broadcasting to listeners...
+--- PASS: TestUnsubscribe (0.00s)
+=== RUN   TestCancelEventStream
+1656440897564673000 [Info] Event stream TestSubscribe stopped listening...
+1656440897564885000 [Info] Event stream TestCancelEventStream start listening...
+1656440897564903000 [Info] Event stream TestCancelEventStream stopped listening...
+1656440897564925000 [Info] Event stream TestUnsubscribe stopped listening...
+--- PASS: TestCancelEventStream (1.00s)
+PASS
+coverage: 95.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/eventstream	2.894s	coverage: 95.0% of statements
+=== RUN   TestGetFileSystemDNSNames
+--- PASS: TestGetFileSystemDNSNames (0.00s)
+=== RUN   TestGetFileSystemDNSNamesError
+--- PASS: TestGetFileSystemDNSNamesError (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/fsx	1.900s	coverage: 100.0% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers/utils [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers/v1 [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers/v2 [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers/v3 [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/handlers/v4 [build failed]
+=== RUN   TestNewHttpClient
+--- PASS: TestNewHttpClient (0.00s)
+=== RUN   TestNewHttpClientProxy
+--- PASS: TestNewHttpClientProxy (0.00s)
+PASS
+coverage: 75.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/httpclient	2.053s	coverage: 75.0% of statements
+=== RUN   TestLogBufferPool
+--- PASS: TestLogBufferPool (0.00s)
+=== RUN   TestMessageTextFormatter_Format
+--- PASS: TestMessageTextFormatter_Format (0.00s)
+=== RUN   TestMessageJsonFormatter_Format
+--- PASS: TestMessageJsonFormatter_Format (0.00s)
+=== RUN   TestGlobal_Init
+--- PASS: TestGlobal_Init (0.00s)
+=== RUN   TestSetGlobalLogger
+--- PASS: TestSetGlobalLogger (0.00s)
+=== RUN   TestEcsMsgFormat
+--- PASS: TestEcsMsgFormat (0.00s)
+=== RUN   TestEcsMsgFormat_Structured
+--- PASS: TestEcsMsgFormat_Structured (0.00s)
+=== RUN   TestLogfmtFormat
+--- PASS: TestLogfmtFormat (0.00s)
+=== RUN   TestLogfmtFormat_Structured
+--- PASS: TestLogfmtFormat_Structured (0.00s)
+=== RUN   TestJSONFormat
+--- PASS: TestJSONFormat (0.00s)
+=== RUN   TestJSONFormat_Structured
+--- PASS: TestJSONFormat_Structured (0.00s)
+=== RUN   TestLogfmtFormat_debug
+--- PASS: TestLogfmtFormat_debug (0.00s)
+=== RUN   TestLogfmtFormat_Structured_debug
+--- PASS: TestLogfmtFormat_Structured_debug (0.00s)
+=== RUN   TestJSONFormat_debug
+--- PASS: TestJSONFormat_debug (0.00s)
+=== RUN   TestJSONFormat_Structured_debug
+--- PASS: TestJSONFormat_Structured_debug (0.00s)
+=== RUN   TestSetLevel
+=== RUN   TestSetLevel/nothing_set
+=== RUN   TestSetLevel/only_loglevel
+=== RUN   TestSetLevel/only_on_instance
+=== RUN   TestSetLevel/both_levels_no_driver
+=== RUN   TestSetLevel/loglevel_and_driver
+=== RUN   TestSetLevel/loglevel_on_instance_and_driver
+=== RUN   TestSetLevel/both_levels_and_driver
+=== RUN   TestSetLevel/only_driver
+--- PASS: TestSetLevel (0.00s)
+    --- PASS: TestSetLevel/nothing_set (0.00s)
+    --- PASS: TestSetLevel/only_loglevel (0.00s)
+    --- PASS: TestSetLevel/only_on_instance (0.00s)
+    --- PASS: TestSetLevel/both_levels_no_driver (0.00s)
+    --- PASS: TestSetLevel/loglevel_and_driver (0.00s)
+    --- PASS: TestSetLevel/loglevel_on_instance_and_driver (0.00s)
+    --- PASS: TestSetLevel/both_levels_and_driver (0.00s)
+    --- PASS: TestSetLevel/only_driver (0.00s)
+=== RUN   TestSeelogConfig_Default
+--- PASS: TestSeelogConfig_Default (0.00s)
+=== RUN   TestSeelogConfig_WithoutLogFile
+--- PASS: TestSeelogConfig_WithoutLogFile (0.00s)
+=== RUN   TestSeelogConfig_DebugLevel
+--- PASS: TestSeelogConfig_DebugLevel (0.00s)
+=== RUN   TestSeelogConfig_SizeRollover
+--- PASS: TestSeelogConfig_SizeRollover (0.00s)
+=== RUN   TestSeelogConfig_SizeRolloverFileSizeChange
+--- PASS: TestSeelogConfig_SizeRolloverFileSizeChange (0.00s)
+=== RUN   TestSeelogConfig_SizeRolloverRollCountChange
+--- PASS: TestSeelogConfig_SizeRolloverRollCountChange (0.00s)
+=== RUN   TestSeelogConfig_JSONOutput
+--- PASS: TestSeelogConfig_JSONOutput (0.00s)
+=== RUN   TestSeelogConfig_NoOnInstanceLog
+--- PASS: TestSeelogConfig_NoOnInstanceLog (0.00s)
+=== RUN   TestSeelogConfig_DifferentLevels
+--- PASS: TestSeelogConfig_DifferentLevels (0.00s)
+=== RUN   TestSeelogConfig_FileLevelDefault
+--- PASS: TestSeelogConfig_FileLevelDefault (0.00s)
+=== RUN   TestNewStructuredLogger
+--- PASS: TestNewStructuredLogger (0.00s)
+=== RUN   TestStructuredLogger
+=== RUN   TestStructuredLogger/trace
+=== RUN   TestStructuredLogger/debug
+=== RUN   TestStructuredLogger/info
+=== RUN   TestStructuredLogger/warn
+=== RUN   TestStructuredLogger/error
+=== RUN   TestStructuredLogger/critical
+--- PASS: TestStructuredLogger (0.00s)
+    --- PASS: TestStructuredLogger/trace (0.00s)
+    --- PASS: TestStructuredLogger/debug (0.00s)
+    --- PASS: TestStructuredLogger/info (0.00s)
+    --- PASS: TestStructuredLogger/warn (0.00s)
+    --- PASS: TestStructuredLogger/error (0.00s)
+    --- PASS: TestStructuredLogger/critical (0.00s)
+PASS
+coverage: 80.7% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/logger	1.989s	coverage: 80.7% of statements
+=== RUN   TestWritingToAuditLog
+--- PASS: TestWritingToAuditLog (0.00s)
+=== RUN   TestWritingToAuditLogV2
+--- PASS: TestWritingToAuditLogV2 (0.00s)
+=== RUN   TestWritingErrorsToAuditLog
+--- PASS: TestWritingErrorsToAuditLog (0.00s)
+=== RUN   TestWritingToAuditLogWhenDisabled
+--- PASS: TestWritingToAuditLogWhenDisabled (0.00s)
+=== RUN   TestConstructCommonAuditLogEntryFields
+--- PASS: TestConstructCommonAuditLogEntryFields (0.00s)
+=== RUN   TestConstructAuditLogEntryByTypeGetCredentials
+--- PASS: TestConstructAuditLogEntryByTypeGetCredentials (0.00s)
+=== RUN   TestConstructAuditLogEntryByTypeUnknownType
+--- PASS: TestConstructAuditLogEntryByTypeUnknownType (0.00s)
+PASS
+1656440900023551000 [Warn] Unknown eventType: unknownEvent
+coverage: 71.1% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/logger/audit	1.943s	coverage: 71.1% of statements
+=== RUN   TestDownloadFile
+--- PASS: TestDownloadFile (0.00s)
+=== RUN   TestDownloadFileError
+--- PASS: TestDownloadFileError (0.00s)
+=== RUN   TestParseS3ARN
+--- PASS: TestParseS3ARN (0.00s)
+=== RUN   TestParseS3ARNInvalid
+--- PASS: TestParseS3ARNInvalid (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/s3	0.505s	coverage: 100.0% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/sighandlers [build failed]
+=== RUN   TestGetSecretsFromSSM
+=== RUN   TestGetSecretsFromSSM/SuccessWithNoInvalidParameters
+=== RUN   TestGetSecretsFromSSM/ErrorWithInvalidParameters
+--- PASS: TestGetSecretsFromSSM (0.00s)
+    --- PASS: TestGetSecretsFromSSM/SuccessWithNoInvalidParameters (0.00s)
+    --- PASS: TestGetSecretsFromSSM/ErrorWithInvalidParameters (0.00s)
+=== RUN   TestGetParametersFromSSM
+=== RUN   TestGetParametersFromSSM/SuccessWithNoInvalidParameters
+=== RUN   TestGetParametersFromSSM/ErrorWithInvalidParameters
+--- PASS: TestGetParametersFromSSM (0.00s)
+    --- PASS: TestGetParametersFromSSM/SuccessWithNoInvalidParameters (0.00s)
+    --- PASS: TestGetParametersFromSSM/ErrorWithInvalidParameters (0.00s)
+PASS
+coverage: 90.5% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/ssm	0.511s	coverage: 90.5% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/statemanager [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/stats [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/asmauth [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/asmsecret [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/credentialspec [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/envFiles [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/firelens [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/fsxwindowsfileserver [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/ssmsecret [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/types [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/taskresource/volume [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/tcs/client [build failed]
+FAIL	github.com/aws/amazon-ecs-agent/agent/tcs/handler [build failed]
+=== RUN   TestParseSemver
+--- PASS: TestParseSemver (0.00s)
+=== RUN   TestVersionMatches
+--- PASS: TestVersionMatches (0.00s)
+=== RUN   TestExtractVersion
+--- PASS: TestExtractVersion (0.00s)
+=== RUN   TestJsonKeys
+--- PASS: TestJsonKeys (0.00s)
+=== RUN   TestCompleteJsonUnmarshal
+--- PASS: TestCompleteJsonUnmarshal (0.00s)
+=== RUN   TestGetTextSuccess
+--- PASS: TestGetTextSuccess (0.00s)
+=== RUN   TestGetTextErrorLicense
+--- PASS: TestGetTextErrorLicense (0.00s)
+=== RUN   TestGetTextErrorNotice
+--- PASS: TestGetTextErrorNotice (0.00s)
+=== RUN   TestTickerHappyCase
+--- PASS: TestTickerHappyCase (1.03s)
+=== RUN   TestRandomDuration
+--- PASS: TestRandomDuration (0.00s)
+=== RUN   TestSendNowDoesNotBlock
+--- PASS: TestSendNowDoesNotBlock (0.00s)
+=== RUN   TestDefaultIfBlank
+--- PASS: TestDefaultIfBlank (0.00s)
+=== RUN   TestZeroOrNil
+=== RUN   TestZeroOrNil/Nil_is_nil
+=== RUN   TestZeroOrNil/0_is_0
+=== RUN   TestZeroOrNil/""_is_the_string_zerovalue
+=== RUN   TestZeroOrNil/ZeroTest_zero-value_should_be_zero
+=== RUN   TestZeroOrNil/ZeroTest_with_a_field_populated_isn't_zero
+=== RUN   TestZeroOrNil/nil_is_nil
+=== RUN   TestZeroOrNil/1_is_not_0
+=== RUN   TestZeroOrNil/[1,2,3]_is_not_zero
+=== RUN   TestZeroOrNil/[]_is_zero
+=== RUN   TestZeroOrNil/Uncomparable_structs_are_never_zero
+=== RUN   TestZeroOrNil/Uncomparable_structs_are_never_zero#01
+=== RUN   TestZeroOrNil/map[string]string_is_zero_or_nil
+=== RUN   TestZeroOrNil/empty_map[string]string_is_zero_or_nil
+=== RUN   TestZeroOrNil/map[string]string{foo:bar}_is_not_zero_or_nil
+--- PASS: TestZeroOrNil (0.00s)
+    --- PASS: TestZeroOrNil/Nil_is_nil (0.00s)
+    --- PASS: TestZeroOrNil/0_is_0 (0.00s)
+    --- PASS: TestZeroOrNil/""_is_the_string_zerovalue (0.00s)
+    --- PASS: TestZeroOrNil/ZeroTest_zero-value_should_be_zero (0.00s)
+    --- PASS: TestZeroOrNil/ZeroTest_with_a_field_populated_isn't_zero (0.00s)
+    --- PASS: TestZeroOrNil/nil_is_nil (0.00s)
+    --- PASS: TestZeroOrNil/1_is_not_0 (0.00s)
+    --- PASS: TestZeroOrNil/[1,2,3]_is_not_zero (0.00s)
+    --- PASS: TestZeroOrNil/[]_is_zero (0.00s)
+    --- PASS: TestZeroOrNil/Uncomparable_structs_are_never_zero (0.00s)
+    --- PASS: TestZeroOrNil/Uncomparable_structs_are_never_zero#01 (0.00s)
+    --- PASS: TestZeroOrNil/map[string]string_is_zero_or_nil (0.00s)
+    --- PASS: TestZeroOrNil/empty_map[string]string_is_zero_or_nil (0.00s)
+    --- PASS: TestZeroOrNil/map[string]string{foo:bar}_is_not_zero_or_nil (0.00s)
+=== RUN   TestSlicesDeepEqual
+=== RUN   TestSlicesDeepEqual/Two_empty_slices
+=== RUN   TestSlicesDeepEqual/One_empty_slice
+=== RUN   TestSlicesDeepEqual/Another_empty_slice
+=== RUN   TestSlicesDeepEqual/Two_slices_with_one_element_each
+=== RUN   TestSlicesDeepEqual/Two_slices_with_multiple_elements
+--- PASS: TestSlicesDeepEqual (0.00s)
+    --- PASS: TestSlicesDeepEqual/Two_empty_slices (0.00s)
+    --- PASS: TestSlicesDeepEqual/One_empty_slice (0.00s)
+    --- PASS: TestSlicesDeepEqual/Another_empty_slice (0.00s)
+    --- PASS: TestSlicesDeepEqual/Two_slices_with_one_element_each (0.00s)
+    --- PASS: TestSlicesDeepEqual/Two_slices_with_multiple_elements (0.00s)
+=== RUN   TestParseBool
+=== RUN   TestParseBool/truthy
+=== RUN   TestParseBool/truthy#01
+=== RUN   TestParseBool/truthy#02
+=== RUN   TestParseBool/truthy#03
+=== RUN   TestParseBool/truthy#04
+=== RUN   TestParseBool/truthy#05
+=== RUN   TestParseBool/falsy
+=== RUN   TestParseBool/falsy#01
+=== RUN   TestParseBool/falsy#02
+=== RUN   TestParseBool/falsy#03
+=== RUN   TestParseBool/falsy#04
+=== RUN   TestParseBool/falsy#05
+=== RUN   TestParseBool/defaults
+=== RUN   TestParseBool/defaults#01
+=== RUN   TestParseBool/defaults#02
+=== RUN   TestParseBool/defaults#03
+=== RUN   TestParseBool/defaults#04
+--- PASS: TestParseBool (0.00s)
+    --- PASS: TestParseBool/truthy (0.00s)
+    --- PASS: TestParseBool/truthy#01 (0.00s)
+    --- PASS: TestParseBool/truthy#02 (0.00s)
+    --- PASS: TestParseBool/truthy#03 (0.00s)
+    --- PASS: TestParseBool/truthy#04 (0.00s)
+    --- PASS: TestParseBool/truthy#05 (0.00s)
+    --- PASS: TestParseBool/falsy (0.00s)
+    --- PASS: TestParseBool/falsy#01 (0.00s)
+    --- PASS: TestParseBool/falsy#02 (0.00s)
+    --- PASS: TestParseBool/falsy#03 (0.00s)
+    --- PASS: TestParseBool/falsy#04 (0.00s)
+    --- PASS: TestParseBool/falsy#05 (0.00s)
+    --- PASS: TestParseBool/defaults (0.00s)
+    --- PASS: TestParseBool/defaults#01 (0.00s)
+    --- PASS: TestParseBool/defaults#02 (0.00s)
+    --- PASS: TestParseBool/defaults#03 (0.00s)
+    --- PASS: TestParseBool/defaults#04 (0.00s)
+=== RUN   TestIsAWSErrorCodeEqual
+=== RUN   TestIsAWSErrorCodeEqual/Happy_Path
+=== RUN   TestIsAWSErrorCodeEqual/Wrong_Error_Code
+=== RUN   TestIsAWSErrorCodeEqual/Wrong_Error_Type
+--- PASS: TestIsAWSErrorCodeEqual (0.00s)
+    --- PASS: TestIsAWSErrorCodeEqual/Happy_Path (0.00s)
+    --- PASS: TestIsAWSErrorCodeEqual/Wrong_Error_Code (0.00s)
+    --- PASS: TestIsAWSErrorCodeEqual/Wrong_Error_Type (0.00s)
+=== RUN   TestGetRequestFailureStatusCode
+=== RUN   TestGetRequestFailureStatusCode/TestGetRequestFailureStatusCodeSuccess
+=== RUN   TestGetRequestFailureStatusCode/TestGetRequestFailureStatusCodeWrongErrType
+--- PASS: TestGetRequestFailureStatusCode (0.00s)
+    --- PASS: TestGetRequestFailureStatusCode/TestGetRequestFailureStatusCodeSuccess (0.00s)
+    --- PASS: TestGetRequestFailureStatusCode/TestGetRequestFailureStatusCodeWrongErrType (0.00s)
+=== RUN   TestMapToTags
+--- PASS: TestMapToTags (0.00s)
+=== RUN   TestNilMapToTags
+--- PASS: TestNilMapToTags (0.00s)
+=== RUN   TestGetTaskID
+--- PASS: TestGetTaskID (0.00s)
+=== RUN   TestGetENIAttachmentId
+--- PASS: TestGetENIAttachmentId (0.00s)
+PASS
+coverage: 67.8% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/utils	3.091s	coverage: 67.8% of statements
+=== RUN   TestJitter
+--- PASS: TestJitter (0.00s)
+=== RUN   TestExponentialBackoff
+--- PASS: TestExponentialBackoff (0.00s)
+=== RUN   TestRetryWithBackoff
+=== RUN   TestRetryWithBackoff/retries
+=== RUN   TestRetryWithBackoff/no_retries
+--- PASS: TestRetryWithBackoff (0.00s)
+    --- PASS: TestRetryWithBackoff/retries (0.00s)
+    --- PASS: TestRetryWithBackoff/no_retries (0.00s)
+=== RUN   TestRetryWithBackoffCtx
+=== RUN   TestRetryWithBackoffCtx/retries
+=== RUN   TestRetryWithBackoffCtx/no_retries
+=== RUN   TestRetryWithBackoffCtx/cancel_context
+--- PASS: TestRetryWithBackoffCtx (0.00s)
+    --- PASS: TestRetryWithBackoffCtx/retries (0.00s)
+    --- PASS: TestRetryWithBackoffCtx/no_retries (0.00s)
+    --- PASS: TestRetryWithBackoffCtx/cancel_context (0.00s)
+=== RUN   TestRetryNWithBackoff
+=== RUN   TestRetryNWithBackoff/count_exceeded
+=== RUN   TestRetryNWithBackoff/retry_succeeded
+--- PASS: TestRetryNWithBackoff (0.00s)
+    --- PASS: TestRetryNWithBackoff/count_exceeded (0.00s)
+    --- PASS: TestRetryNWithBackoff/retry_succeeded (0.00s)
+=== RUN   TestRetryNWithBackoffCtx
+=== RUN   TestRetryNWithBackoffCtx/count_exceeded
+=== RUN   TestRetryNWithBackoffCtx/retry_succeeded
+=== RUN   TestRetryNWithBackoffCtx/cancel_context
+--- PASS: TestRetryNWithBackoffCtx (0.00s)
+    --- PASS: TestRetryNWithBackoffCtx/count_exceeded (0.00s)
+    --- PASS: TestRetryNWithBackoffCtx/retry_succeeded (0.00s)
+    --- PASS: TestRetryNWithBackoffCtx/cancel_context (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/utils/retry	1.993s	coverage: 100.0% of statements
+=== RUN   TestSequentialWaitgroup
+--- PASS: TestSequentialWaitgroup (0.00s)
+=== RUN   TestManyDones
+--- PASS: TestManyDones (0.00s)
+PASS
+coverage: 86.2% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/utils/sync	1.962s	coverage: 86.2% of statements
+=== RUN   TestClientProxy
+1656440901370068000 [Info] logger=structured msg="Establishing a Websocket connection" url="http://www.amazon.com"
+1656440901371767000 [Info] NO_PROXY set:169.254.169.254,169.254.170.2,/var/run/docker.sock
+1656440901373060000 [Warn] Error creating a websocket client: dial tcp 127.0.0.1:1234: connect: connection refused
+--- PASS: TestClientProxy (0.00s)
+=== RUN   TestConcurrentWritesDontPanic
+1656440901375522000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63032"
+1656440901400167000 [Debug] Established a Websocket connection to https://127.0.0.1:63032
+    client_test.go:101: Waiting for all 20 requests to succeed
+--- PASS: TestConcurrentWritesDontPanic (0.03s)
+=== RUN   TestProxyVariableCustomValue
+1656440901404574000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63034"
+1656440901421876000 [Debug] Established a Websocket connection to https://127.0.0.1:63034
+--- PASS: TestProxyVariableCustomValue (0.02s)
+=== RUN   TestProxyVariableDefaultValue
+1656440901422929000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63036"
+1656440901423158000 [Info] NO_PROXY set:169.254.169.254,169.254.170.2,/var/run/docker.sock
+1656440901437706000 [Debug] Established a Websocket connection to https://127.0.0.1:63036
+--- PASS: TestProxyVariableDefaultValue (0.02s)
+=== RUN   TestHandleMessagePermissibleCloseCode
+1656440901438662000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63038"
+1656440901453421000 [Debug] Established a Websocket connection to https://127.0.0.1:63038
+1656440901453878000 [Debug] Connection closed for a valid reason: websocket: close 1000 (normal): :)
+--- PASS: TestHandleMessagePermissibleCloseCode (0.02s)
+=== RUN   TestHandleMessageUnexpectedCloseCode
+1656440901454803000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:63040"
+1656440901473217000 [Debug] Established a Websocket connection to https://127.0.0.1:63040
+1656440901473526000 [Debug] Error getting message from ws backend: error: [websocket: close 1013: :(], messageType: [-1] 
+--- PASS: TestHandleMessageUnexpectedCloseCode (0.02s)
+=== RUN   TestHandleNonHTTPSEndpoint
+1656440901474157000 [Info] logger=structured msg="Establishing a Websocket connection" url="http://127.0.0.1:63042"
+1656440901483794000 [Debug] Established a Websocket connection to http://127.0.0.1:63042
+    client_test.go:213: Waiting for single request to be visible server-side
+--- PASS: TestHandleNonHTTPSEndpoint (0.01s)
+=== RUN   TestHandleIncorrectURLScheme
+1656440901485014000 [Info] logger=structured msg="Establishing a Websocket connection" url="notaparticularlyrealscheme://127.0.0.1:63044"
+--- PASS: TestHandleIncorrectURLScheme (0.00s)
+=== RUN   TestWebsocketScheme
+--- PASS: TestWebsocketScheme (0.00s)
+=== RUN   TestSetReadDeadlineClosedConnection
+1656440901485721000 [Warn] Unable to set read deadline for websocket connection: : use of closed network connection for 
+1656440901485746000 [Error] Stopping redundant reads on closed network connection: 
+--- PASS: TestSetReadDeadlineClosedConnection (0.00s)
+=== RUN   TestSetReadDeadlineError
+1656440901486120000 [Warn] Unable to set read deadline for websocket connection: error for 
+--- PASS: TestSetReadDeadlineError (0.00s)
+PASS
+coverage: 44.3% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/wsclient	1.105s	coverage: 44.3% of statements

@@ -102,8 +102,8 @@ type session struct {
 	_heartbeatJitter                time.Duration
 	_inactiveInstanceReconnectDelay time.Duration
 	// temporary boolean for disconnectionMode (TODO: remove when importing config var)
-	disconnectionModeEnabled		bool
-	disconnectionTimer ttime.Timer
+	// disconnectionModeEnabled		bool
+	disconnectionTimer *time.Timer
 }
 
 // sessionResources defines the resource creator interface for starting
@@ -164,8 +164,8 @@ func NewSession(
 	backoff := retry.NewExponentialBackoff(connectionBackoffMin, connectionBackoffMax,
 		connectionBackoffJitter, connectionBackoffMultiplier)
 	derivedContext, cancel := context.WithCancel(ctx)
-	disconnectionTimer := nil
-	dsconnectionModeEnabled = false
+	// disconnectionTimer := nil
+	// disconnectionModeEnabled := false
 	return &session{
 		agentConfig:                     config,
 		deregisterInstanceEventStream:   deregisterInstanceEventStream,
@@ -188,8 +188,8 @@ func NewSession(
 		_heartbeatJitter:                heartbeatJitter,
 		_inactiveInstanceReconnectDelay: inactiveInstanceReconnectDelay,
 		//  (TODO: remove for config var)
-		disconnectionModeEnabled:		 disconnectionModeEnabled,
-		disconnectionTimer: disconnectionTimer,
+		// disconnectionModeEnabled:		 disconnectionModeEnabled,
+		// disconnectionTimer: disconnectionTimer,
 	}
 }
 
@@ -201,6 +201,7 @@ func NewSession(
 // If the instance is deregistered, Start() would emit an event to the
 // deregister-instance event stream and sets the connection backoff time to 1 hour.
 func (acsSession *session) Start() error {
+	cfg := acsSession.agentConfig
 	// connectToACS channel is used to indicate the intent to connect to ACS
 	// It's processed by the select loop to connect to ACS
 	connectToACS := make(chan struct{}, 1)
@@ -238,20 +239,21 @@ func (acsSession *session) Start() error {
 				sendEmptyMessageOnChannel(connectToACS)
 			} else {
 				// TODO: check if ECS disconnectionmode capabilities exist  
-
-				if acsSession.disconnectionTimer != nil {
-				// TODO: 
-				// 1. attempt reconnection (send connectToACS message on channel)
-					if checkDisconnectionTimer {
-						acsSession.disconnectionModeEnabled = true
+				if cfg.DisconnectCapable.Enabled() {
+					if acsSession.disconnectionTimer != nil {
+					// TODO: 
+					// 1. attempt reconnection (send connectToACS message on channel)
+						if acsSession.checkDisconnectionTimer() {
+							cfg.SetDisconnectModeEnabled(true)
+						} else {
+							sendEmptyMessageOnChannel(connectToACS)
+						}
 					} else {
-						sendEmptyMessageOnChannel(connectToACS)
+						acsSession.startDisconnectionTimer()
 					}
 				} else {
-					acsSession.startDisconnectionTimer()
-				}
 				// Disconnected unexpectedly from ACS, compute backoff duration to
-				// reconnect
+				// reconnect + Disconnect Mode capability is off 
 				reconnectDelay := acsSession.computeReconnectDelay(isInactiveInstance)
 				seelog.Infof("Reconnecting to ACS in: %s", reconnectDelay.String())
 				waitComplete := acsSession.waitForDuration(reconnectDelay)
@@ -268,6 +270,7 @@ func (acsSession *session) Start() error {
 					seelog.Info("Interrupted waiting for reconnect delay to elapse; Expect session to close")
 				}
 			}
+			}
 		case <-acsSession.ctx.Done():
 			// agent is shutting down, exiting cleanly
 			return nil
@@ -276,18 +279,18 @@ func (acsSession *session) Start() error {
 	}
 }
 
-//TODO: check if timer has finished 
+// //TODO: check if timer has finished 
 func (acsSession *session) checkDisconnectionTimer() bool {
 	select {
-	case <-session.disconnectionTimer.C:
+	case <-acsSession.disconnectionTimer.C:
 		return true
 	
 	}
 	return false
 }
-// TODO: start timer using NewTimer (could also use AfterFunc but less sure about that)
+// // TODO: start timer using NewTimer (could also use AfterFunc but less sure about that)
 func (acsSession *session) startDisconnectionTimer() {
-	session.disconnectionTimer := time.NewTimer(time.Duration(time.Minute * 5))
+	acsSession.disconnectionTimer = time.NewTimer(time.Duration(time.Minute * 5))
 
 }
 
@@ -398,8 +401,8 @@ func (acsSession *session) startACSSession(client wsclient.ClientServer) error {
 
 	seelog.Info("Connected to ACS endpoint")
 	// TODO: 
-	// once this is successful, set disconnectModeEnabled to TRUE
-	acsSession.disconnectionModeEnabled = true
+	// once this is successful, set disconnectModeEnabled to FALSE 
+	cfg.SetDisconnectModeEnabled(false)
 	// Start inactivity timer for closing the connection
 	timer := newDisconnectionTimer(client, acsSession.heartbeatTimeout(), acsSession.heartbeatJitter())
 	// Any message from the server resets the disconnect timeout

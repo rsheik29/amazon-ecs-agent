@@ -1,0 +1,2 @@
+FAIL	github.com/aws/amazon-ecs-agent/agent/acs/handler [build failed]
+FAIL

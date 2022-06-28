@@ -1,0 +1,60 @@
+=== RUN   TestMakeUnrecognizedRequest
+--- PASS: TestMakeUnrecognizedRequest (0.00s)
+=== RUN   TestWriteAckRequest
+--- PASS: TestWriteAckRequest (0.00s)
+=== RUN   TestPayloadHandlerCalled
+1656449609225377000 [Debug] ACS client starting websocket poll loop
+1656449609226472000 [Debug] Received message of type: PayloadMessage
+1656449609226714000 [Debug] Received message of type: PayloadMessage
+--- PASS: TestPayloadHandlerCalled (0.00s)
+=== RUN   TestRefreshCredentialsHandlerCalled
+1656449609227273000 [Debug] ACS client starting websocket poll loop
+1656449609227822000 [Debug] Received message of type: IAMRoleCredentialsMessage
+--- PASS: TestRefreshCredentialsHandlerCalled (0.00s)
+=== RUN   TestClosingConnection
+1656449609228053000 [Debug] Received message of type: IAMRoleCredentialsMessage
+1656449609228122000 [Debug] ACS client starting websocket poll loop
+1656449609228529000 [Debug] Error getting message from ws backend: error: [EOF], messageType: [0] 
+--- PASS: TestClosingConnection (0.00s)
+=== RUN   TestConnect
+1656449609231161000 [Info] logger=structured msg="Establishing a Websocket connection" url="https://127.0.0.1:55661"
+1656449609232104000 [Info] NO_PROXY set:169.254.169.254,169.254.170.2,
+1656449609256308000 [Debug] Established a Websocket connection to https://127.0.0.1:55661
+1656449609256574000 [Debug] ACS client starting websocket poll loop
+1656449609257673000 [Debug] Received message of type: PayloadMessage
+1656449609258830000 [Debug] Connection closed for a valid reason: websocket: close 1006 (abnormal closure): unexpected EOF
+--- PASS: TestConnect (0.03s)
+=== RUN   TestConnectClientError
+1656449609259105000 [Info] logger=structured msg="Establishing a Websocket connection" url="http://127.0.0.1:55663"
+--- PASS: TestConnectClientError (0.01s)
+=== RUN   TestAttachENIHandlerCalled
+1656449609268370000 [Debug] ACS client starting websocket poll loop
+1656449609268701000 [Debug] Received message of type: AttachTaskNetworkInterfacesMessage
+--- PASS: TestAttachENIHandlerCalled (0.00s)
+=== RUN   TestAttachInstanceENIHandlerCalled
+1656449609268950000 [Debug] Received message of type: AttachTaskNetworkInterfacesMessage
+1656449609269076000 [Debug] ACS client starting websocket poll loop
+1656449609269304000 [Debug] Received message of type: AttachInstanceNetworkInterfacesMessage
+--- PASS: TestAttachInstanceENIHandlerCalled (0.00s)
+=== RUN   TestInvalidInstanceException
+--- PASS: TestInvalidInstanceException (0.00s)
+1656449609269516000 [Debug] Received message of type: AttachInstanceNetworkInterfacesMessage
+=== RUN   TestInvalidClusterException
+--- PASS: TestInvalidClusterException (0.00s)
+=== RUN   TestServerException
+--- PASS: TestServerException (0.00s)
+=== RUN   TestGenericErrorConversion
+--- PASS: TestGenericErrorConversion (0.00s)
+=== RUN   TestSomeRandomTypeConversion
+--- PASS: TestSomeRandomTypeConversion (0.00s)
+=== RUN   TestBadlyTypedMessage
+--- PASS: TestBadlyTypedMessage (0.00s)
+PASS
+coverage: 94.4% of statements
+ok  	github.com/aws/amazon-ecs-agent/agent/acs/client	0.839s	coverage: 94.4% of statements
+FAIL	github.com/aws/amazon-ecs-agent/agent/acs/handler [build failed]
+?   	github.com/aws/amazon-ecs-agent/agent/acs/model	[no test files]
+?   	github.com/aws/amazon-ecs-agent/agent/acs/model/ecsacs	[no test files]
+FAIL	github.com/aws/amazon-ecs-agent/agent/acs/update_handler [build failed]
+?   	github.com/aws/amazon-ecs-agent/agent/acs/update_handler/mock	[no test files]
+FAIL
