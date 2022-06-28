@@ -147,11 +147,13 @@ var testConfig = &config.Config{
 
 // TODO create new config where disconnectmode capable is ON
 //
+
 var testConfigDisconnect = &config.Config{
 	Cluster:            "someCluster",
 	AcceptInsecureCert: true,
-	DisconnectCapable:  true,
+	DisconnectCapable:  parseBooleanDefaultFalseConfig("ECS_DISCONNECT_CAPABLE"),
 }
+
 var testCreds = credentials.NewStaticCredentials("test-id", "test-secret", "test-token")
 
 type mockSessionResources struct {
@@ -460,6 +462,7 @@ func TestHandlerReconnectsWithBackoffOnNonEOFError(t *testing.T) {
 func TestHandlerAttemptsReconnectionWithDisconnectCapability(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
+	defer setTestEnv("ECS_DISCONNECT_CAPABLE", "true")()
 
 	taskEngine := mock_engine.NewMockTaskEngine(ctrl)
 	taskEngine.EXPECT().Version().Return("Docker: 1.5.0", nil).AnyTimes()
@@ -496,7 +499,7 @@ func TestHandlerAttemptsReconnectionWithDisconnectCapability(t *testing.T) {
 		containerInstanceARN: "myArn",
 		credentialsProvider:  testCreds,
 		// TODO change testConfig to my own testconfig w disconnect capable on
-		agentConfig:                   testConfig,
+		agentConfig:                   testConfigDisconnect,
 		taskEngine:                    taskEngine,
 		ecsClient:                     ecsClient,
 		deregisterInstanceEventStream: deregisterInstanceEventStream,
