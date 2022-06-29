@@ -26,6 +26,8 @@ import (
 	"runtime"
 	"runtime/pprof"
 	"strconv"
+
+	// "strings"
 	"sync"
 	"testing"
 	"time"
@@ -151,7 +153,7 @@ var testConfig = &config.Config{
 var testConfigDisconnect = &config.Config{
 	Cluster:            "someCluster",
 	AcceptInsecureCert: true,
-	DisconnectCapable:  parseBooleanDefaultFalseConfig("ECS_DISCONNECT_CAPABLE"),
+	DisconnectCapable:  BooleanDefaultFalse{Value: ExplicitlyEnabled},
 }
 
 var testCreds = credentials.NewStaticCredentials("test-id", "test-secret", "test-token")
@@ -459,10 +461,31 @@ func TestHandlerReconnectsWithBackoffOnNonEOFError(t *testing.T) {
 	}
 }
 
+// func parseBooleanDefaultFalseConfig(envVarName string) BooleanDefaultFalse {
+// 	boolDefaultFalseCofig := BooleanDefaultFalse{Value: NotSet}
+// 	configString := strings.TrimSpace(os.Getenv(envVarName))
+// 	if configString == "" {
+// 		// if intentionally not set, do not add warning log
+// 		return boolDefaultFalseCofig
+// 	}
+
+// 	res, err := strconv.ParseBool(configString)
+// 	if err == nil {
+// 		if res {
+// 			boolDefaultFalseCofig.Value = ExplicitlyEnabled
+// 		} else {
+// 			boolDefaultFalseCofig.Value = ExplicitlyDisabled
+// 		}
+// 	} else {
+// 		seelog.Warnf("Invalid format for \"%s\", expected a boolean. err %v", envVarName, err)
+// 	}
+// 	return boolDefaultFalseCofig
+// }
+
 func TestHandlerAttemptsReconnectionWithDisconnectCapability(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-	defer setTestEnv("ECS_DISCONNECT_CAPABLE", "true")()
+	// os.setEnv("ECS_DISCONNECT_CAPABLE", "true")()
 
 	taskEngine := mock_engine.NewMockTaskEngine(ctrl)
 	taskEngine.EXPECT().Version().Return("Docker: 1.5.0", nil).AnyTimes()
