@@ -153,7 +153,7 @@ var testConfig = &config.Config{
 var testConfigDisconnect = &config.Config{
 	Cluster:            "someCluster",
 	AcceptInsecureCert: true,
-	DisconnectCapable:  config.BooleanDefaultFalse{Value: ExplicitlyEnabled},
+	DisconnectCapable:  config.BooleanDefaultFalse{Value: config.ExplicitlyEnabled},
 }
 
 var testCreds = credentials.NewStaticCredentials("test-id", "test-secret", "test-token")
