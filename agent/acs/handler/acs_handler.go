@@ -210,6 +210,7 @@ func (acsSession *session) Start() error {
 	connectToACS <- struct{}{}
 	for {
 		select {
+			seelog.Debug("entered select options line 212")
 		case <-connectToACS:
 			seelog.Debugf("Received connect to ACS message")
 			// Start a session with ACS
@@ -238,17 +239,22 @@ func (acsSession *session) Start() error {
 				acsSession.backoff.Reset()
 				sendEmptyMessageOnChannel(connectToACS)
 			} else {
+				seelog.Debugf("Entered 'shouldReconnectWithBackoff' code block")
+
 				// TODO: check if ECS disconnectionmode capabilities exist  
 				if cfg.DisconnectCapable.Enabled() {
+					seelog.Debugf("Entered cfg.DisconnectCapable code block")
 					if acsSession.disconnectionTimer != nil {
 					// TODO: 
 					// 1. attempt reconnection (send connectToACS message on channel)
 						if acsSession.checkDisconnectionTimer() {
 							cfg.SetDisconnectModeEnabled(true)
+							seelog.Debugf("set disconnect enabled to true %v", cfg.getDisconnectModeEnabled())
 						} else {
 							sendEmptyMessageOnChannel(connectToACS)
 						}
 					} else {
+						seelog.Debugf("starting disconnection timer")
 						acsSession.startDisconnectionTimer()
 					}
 				} else {
