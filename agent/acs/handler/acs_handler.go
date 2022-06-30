@@ -215,6 +215,7 @@ func (acsSession *session) Start() error {
 			seelog.Debugf("Received connect to ACS message")
 			// Start a session with ACS
 			acsError := acsSession.startSessionOnce()
+			seelog.Debugf("RIYA here is acsError: %v", acsError)
 			select {
 			case <-acsSession.ctx.Done():
 				// agent is shutting down, exiting cleanly
