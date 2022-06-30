@@ -209,7 +209,7 @@ func (acsSession *session) Start() error {
 	// connections are triggered by the handleACSError() method
 	connectToACS <- struct{}{}
 	for {
-		seelog.Debug("going to select options line 212")
+		seelog.Debug("RIYA going to select options line 212")
 		select {
 		case <-connectToACS:
 			seelog.Debugf("Received connect to ACS message")
@@ -239,22 +239,29 @@ func (acsSession *session) Start() error {
 				acsSession.backoff.Reset()
 				sendEmptyMessageOnChannel(connectToACS)
 			} else {
-				seelog.Debugf("Entered 'shouldReconnectWithBackoff' code block")
+				seelog.Debugf("RIYA Entered 'shouldReconnectWithBackoff' code block")
 
 				// TODO: check if ECS disconnectionmode capabilities exist
 				if cfg.DisconnectCapable.Enabled() {
-					seelog.Debugf("Entered cfg.DisconnectCapable code block")
+					seelog.Debugf("RIYA Entered cfg.DisconnectCapable code block")
 					if acsSession.disconnectionTimer != nil {
 						// TODO:
 						// 1. attempt reconnection (send connectToACS message on channel)
 						if acsSession.checkDisconnectionTimer() {
 							cfg.SetDisconnectModeEnabled(true)
-							seelog.Debugf("set disconnect enabled to true %v", cfg.GetDisconnectModeEnabled())
+							seelog.Debugf("RIYA set disconnect enabled to true %v", cfg.GetDisconnectModeEnabled())
 						} else {
-							sendEmptyMessageOnChannel(connectToACS)
+							seelog.Debugf("RIYA starting 1 minute timer to reconnect to ACS")
+							intervalComplete := acsSession.waitForDuration(1 * time.Minute)
+							if intervalComplete {
+								seelog.Debugf("RIYA finished timer, attempting to reconnect to ACS")
+								sendEmptyMessageOnChannel(connectToACS)
+							} else {
+								seelog.Debugf("RIYA 1 minute timer wait interrupted")
+							}
 						}
 					} else {
-						seelog.Debugf("starting disconnection timer")
+						seelog.Debugf("RIYA starting disconnection timer")
 						acsSession.startDisconnectionTimer()
 					}
 				} else {

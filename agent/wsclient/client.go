@@ -154,7 +154,7 @@ func (cs *ClientServerImpl) Connect() error {
 	if err != nil {
 		return err
 	}
-
+	seelog.Debugf("RIYA calling websocket Scheme")
 	wsScheme, err := websocketScheme(parsedURL.Scheme)
 	if err != nil {
 		return err
@@ -163,6 +163,8 @@ func (cs *ClientServerImpl) Connect() error {
 
 	// NewRequest never returns an error if the url parses and we just verified
 	// it did above
+	seelog.Debugf("RIYA new url request")
+
 	request, _ := http.NewRequest("GET", parsedURL.String(), nil)
 
 	// Sign the request; we'll send its headers via the websocket client which includes the signature
@@ -174,6 +176,7 @@ func (cs *ClientServerImpl) Connect() error {
 	timeoutDialer := &net.Dialer{Timeout: wsConnectTimeout}
 	tlsConfig := &tls.Config{ServerName: parsedURL.Host, InsecureSkipVerify: cs.AgentConfig.AcceptInsecureCert}
 	cipher.WithSupportedCipherSuites(tlsConfig)
+	seelog.Debugf("RIYA setting no proxy")
 
 	// Ensure that NO_PROXY gets set
 	noProxy := os.Getenv("NO_PROXY")
@@ -196,6 +199,7 @@ func (cs *ClientServerImpl) Connect() error {
 		NetDial:          timeoutDialer.Dial,
 		HandshakeTimeout: wsHandshakeTimeout,
 	}
+	seelog.Debug("RIYA dialing websocket here")
 
 	websocketConn, httpResponse, err := dialer.Dial(parsedURL.String(), request.Header)
 	if httpResponse != nil {
