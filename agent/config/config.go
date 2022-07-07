@@ -195,11 +195,7 @@ var (
 	disconnectMode = DisconnectMode{}
 )
 
-<<<<<<< HEAD
 func (cfg *Config) GetDisconnectModeEnabled() bool {
-=======
-func GetDisconnectModeEnabled() bool {
->>>>>>> 491160a3 (Add disconnectModeEnabled flag (#3271))
 
 	disconnectMode.disconnectModeLock.RLock()
 	defer disconnectMode.disconnectModeLock.RUnlock()
@@ -207,11 +203,7 @@ func GetDisconnectModeEnabled() bool {
 	return disconnectMode.disconnectModeEnabled
 }
 
-<<<<<<< HEAD
 func (cfg *Config) SetDisconnectModeEnabled(desiredDisconnectEnabledStatus bool) {
-=======
-func SetDisconnectModeEnabled(desiredDisconnectEnabledStatus bool) {
->>>>>>> 491160a3 (Add disconnectModeEnabled flag (#3271))
 
 	disconnectMode.disconnectModeLock.Lock()
 	defer disconnectMode.disconnectModeLock.Unlock()
