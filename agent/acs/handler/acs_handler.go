@@ -229,6 +229,7 @@ func (acsSession *session) Start() error {
 				}
 			}
 			if cfg.GetDisconnectModeEnabled() {
+				logger.Debug("Starting 5 minute timer to reconnect to ACS")
 				reconnectIntervalComplete := acsSession.waitForDuration(time.Duration(disconnectTime))
 				if reconnectIntervalComplete {
 					logger.Debug("5 minute timer complete, attempting to reconnect to ACS")
