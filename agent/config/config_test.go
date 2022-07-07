@@ -34,7 +34,6 @@ import (
 )
 
 func TestDefaultValueOfDisconnectModeEnabled(t *testing.T) {
-<<<<<<< HEAD
 	conf := Config{Cluster: "Foo"}
 
 	assert.False(t, conf.GetDisconnectModeEnabled(), "Wrong default value for disconnectModeEnabled, expected value is false")
@@ -48,19 +47,6 @@ func TestGetAndSetDisconnectModeEnabled(t *testing.T) {
 
 	conf.SetDisconnectModeEnabled(false)
 	assert.False(t, conf.GetDisconnectModeEnabled(), "Wrong value for disconnectModeEnabled, expected value is false")
-=======
-
-	assert.False(t, GetDisconnectModeEnabled(), "Wrong default value for disconnectModeEnabled, expected value is false")
-}
-
-func TestGetAndSetDisconnectModeEnabled(t *testing.T) {
-
-	SetDisconnectModeEnabled(true)
-	assert.True(t, GetDisconnectModeEnabled(), "Wrong value for disconnectModeEnabled, expected value is true")
-
-	SetDisconnectModeEnabled(false)
-	assert.False(t, GetDisconnectModeEnabled(), "Wrong value for disconnectModeEnabled, expected value is false")
->>>>>>> 491160a3 (Add disconnectModeEnabled flag (#3271))
 }
 
 func TestMerge(t *testing.T) {
