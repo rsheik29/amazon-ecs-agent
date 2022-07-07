@@ -252,6 +252,7 @@ func (acsSession *session) Start() error {
 					// If the timer has been completed, then set DisconnectModeEnabled to true.
 					if timerCompleted {
 						cfg.SetDisconnectModeEnabled(true)
+						acsSession.disconnectionTimer = nil
 						logger.Debug("Turning Disconnection Mode on after timer is completed", logger.Fields{
 							"disconnectionMode": cfg.GetDisconnectModeEnabled(),
 						})
