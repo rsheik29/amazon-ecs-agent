@@ -45,6 +45,7 @@ import (
 )
 
 const (
+	disconnectTime = 5 * time.Minute
 	// heartbeatTimeout is the maximum time to wait between heartbeats
 	// without disconnecting
 	heartbeatTimeout = 1 * time.Minute
@@ -227,6 +228,7 @@ func (acsSession *session) Start() error {
 					seelog.Debugf("Failed to write to deregister container instance event stream, err: %v", err)
 				}
 			}
+
 			if shouldReconnectWithoutBackoff(acsError) {
 				// If ACS closed the connection, there's no need to backoff,
 				// reconnect immediately
@@ -301,7 +303,7 @@ func (acsSession *session) checkDisconnectionTimer() bool {
 
 // // TODO: start timer using NewTimer (could also use AfterFunc but less sure about that)
 func (acsSession *session) startDisconnectionTimer() {
-	acsSession.disconnectionTimer = time.NewTimer(time.Duration(time.Minute * 5))
+	acsSession.disconnectionTimer = time.NewTimer(time.Duration(disconnectTime))
 
 }
 
