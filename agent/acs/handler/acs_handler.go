@@ -228,7 +228,13 @@ func (acsSession *session) Start() error {
 					seelog.Debugf("Failed to write to deregister container instance event stream, err: %v", err)
 				}
 			}
-
+			if cfg.GetDisconnectModeEnabled() {
+				reconnectIntervalComplete := acsSession.waitForDuration(time.Duration(disconnectTime))
+				if reconnectIntervalComplete {
+					logger.Debug("5 minute timer complete, attempting to reconnect to ACS")
+					sendEmptyMessageOnChannel(connectToACS)
+				}
+			}
 			if shouldReconnectWithoutBackoff(acsError) {
 				// If ACS closed the connection, there's no need to backoff,
 				// reconnect immediately
@@ -251,6 +257,7 @@ func (acsSession *session) Start() error {
 						})
 						// If the timer has not been completed, then attempt to connect to ACS every minute (to avoid
 						// excessive connection attempts).
+						sendEmptyMessageOnChannel(connectToACS)
 					} else {
 						logger.Debug("Starting 1 minute timer to reconnect to ACS")
 						intervalComplete := acsSession.waitForDuration(1 * time.Minute)
