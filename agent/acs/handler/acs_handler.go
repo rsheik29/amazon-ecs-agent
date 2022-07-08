@@ -276,7 +276,7 @@ func (acsSession *session) Start() error {
 							sendEmptyMessageOnChannel(connectToACS)
 						}
 					}
-				} else {
+				} else if !cfg.GetDisconnectModeEnabled() {
 					logger.Debug("Starting disconnectionTimer to enable DisconnectModeEnabled")
 					acsSession.disconnectionTimer = time.NewTimer(time.Duration(disconnectTimeout))					
 					sendEmptyMessageOnChannel(connectToACS)
