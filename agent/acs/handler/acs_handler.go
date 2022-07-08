@@ -45,16 +45,12 @@ import (
 )
 
 const (
-<<<<<<< HEAD
-	disconnectTime = 5 * time.Minute
-=======
 	//Constant time for the disconnectionTimer before turning DisconnectModeEnabled on.
 	disconnectTimeout = 5 * time.Minute
 
 	//Constant interval between reconnecting ACS while the disconnectionTimer is actively running.
 	reconnectToACSTimeout = 1 * time.Minute
 
->>>>>>> c28e354cf8bca60f496d8eba68188a6d00eff1fd
 	// heartbeatTimeout is the maximum time to wait between heartbeats
 	// without disconnecting
 	heartbeatTimeout = 1 * time.Minute
@@ -278,7 +274,7 @@ func (acsSession *session) Start() error {
 					}
 				} else if !cfg.GetDisconnectModeEnabled() {
 					logger.Debug("Starting disconnectionTimer to enable DisconnectModeEnabled")
-					acsSession.disconnectionTimer = time.NewTimer(time.Duration(disconnectTimeout))					
+					acsSession.disconnectionTimer = time.NewTimer(time.Duration(disconnectTimeout))
 					sendEmptyMessageOnChannel(connectToACS)
 				}
 			} else {
@@ -425,11 +421,7 @@ func (acsSession *session) startACSSession(client wsclient.ClientServer) error {
 	// Once ACS successfully reconnects, set disconnectModeEnabled to FALSE
 	if cfg.DisconnectCapable.Enabled() {
 		if cfg.GetDisconnectModeEnabled() {
-<<<<<<< HEAD
-			logger.Debug("Turning Disconnect Mode off after successful reconnection.")
-=======
 			logger.Debug("Turning DisconnectModeEnabled off after successful reconnection.")
->>>>>>> c28e354cf8bca60f496d8eba68188a6d00eff1fd
 			cfg.SetDisconnectModeEnabled(false)
 			// If reconnection is successful when the disconnection timer has already started,
 			// then terminate the timer. This way the timer can be re-initalized when connection
