@@ -262,6 +262,7 @@ func (acsSession *session) Start() error {
 							"disconnectionMode": cfg.GetDisconnectModeEnabled(),
 						})
 						acsSession.disconnectionTimer = nil
+						sendEmptyMessageOnChannel(connectToACS)
 						// If the timer has not been completed, then attempt to connect to ACS every minute (to avoid
 						// excessive connection attempts).
 					} else {
