@@ -47,6 +47,8 @@ const (
 	submitStateBackoffMax            = 30 * time.Second
 	submitStateBackoffJitterMultiple = 0.20
 	submitStateBackoffMultiple       = 1.3
+
+	// add 120 as a constant
 )
 
 // TaskHandler encapsulates the the map of a task arn to task and container events
@@ -330,9 +332,16 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	// to our goroutine
 	done := false
 	// TODO: wire in the context here. Else, we have go routine leaks in tests
+	taskCount := 0
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
 		// we haven't emptied the list so we should keep submitting
+		if taskCount == 120 {
+			// (because 120 is the refill rate per minute)
+			time.Sleep(time.Minute)
+			taskCount = 0
+		}
+
 		backoff.Reset()
 		retry.RetryWithBackoff(backoff, func() error {
 			// Lock and unlock within this function, allowing the list to be added
@@ -343,6 +352,7 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 
 			var err error
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
+			count += 1
 			return err
 		})
 	}
