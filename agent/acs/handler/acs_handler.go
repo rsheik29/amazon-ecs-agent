@@ -290,6 +290,20 @@ func (acsSession *session) Start() error {
 // has DisconnectMode capability, and network connection has been lost.
 func (acsSession *session) startDisconnectMode() {
 	connectToACS := make(chan struct{}, 1)
+	connectToACS <- struct{}{}
+	for {
+		select {
+		case <-connectToACS:
+			seelog.Debugf("Received connect to ACS message")
+			// Start a session with ACS
+			acsError := acsSession.startSessionOnce()
+		}
+	}
+	if acsError != nil {
+		logger.Debug("ACS Error failed to connect due to:", logger.Fields{
+			"acsError": acsError,
+		})
+	}
 	cfg := acsSession.agentConfig
 	if acsSession.disconnectionTimer != nil {
 		timerCompleted := acsSession.checkDisconnectionTimer()
