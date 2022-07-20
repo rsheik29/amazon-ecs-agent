@@ -297,12 +297,12 @@ func (acsSession *session) startDisconnectMode() {
 			seelog.Debugf("Received connect to ACS message")
 			// Start a session with ACS
 			acsError := acsSession.startSessionOnce()
+			if acsError != nil {
+				logger.Debug("ACS Error failed to connect due to:", logger.Fields{
+					"acsError": acsError,
+				})
+			}
 		}
-	}
-	if acsError != nil {
-		logger.Debug("ACS Error failed to connect due to:", logger.Fields{
-			"acsError": acsError,
-		})
 	}
 	cfg := acsSession.agentConfig
 	if acsSession.disconnectionTimer != nil {
