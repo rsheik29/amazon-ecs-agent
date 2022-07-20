@@ -49,6 +49,11 @@ const (
 	submitStateBackoffMax            = 30 * time.Second
 	submitStateBackoffJitterMultiple = 0.20
 	submitStateBackoffMultiple       = 1.3
+
+	// throttlingLimit is the sustained throttling limit for Agent Modifying API Calls
+	// such as submitting task state changes.
+
+	throttlingLimit = 5
 )
 
 // TaskHandler encapsulates the the map of a task arn to task and container events
@@ -344,10 +349,17 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	// Mirror events.sending, but without the need to lock since this is local
 	// to our goroutine
 	done := false
+	taskCount := 0
 	// TODO: wire in the context here. Else, we have go routine leaks in tests
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
 		// we haven't emptied the list so we should keep submitting
+		if taskCount == throttlingLimit {
+			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+			time.Sleep(time.Minute)
+			logger.Debug("Sleep completed: resuming sending task events.")
+			taskCount = 0
+		}
 		backoff.Reset()
 		retry.RetryWithBackoffForTaskHandler(handler.cfg, taskARN, handler.disconnectedModeTaskEventRetryDelay, backoff, handler.eventFlowCtx, func() error {
 			// Lock and unlock within this function, allowing the list to be added
@@ -358,7 +370,10 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 
 			var err error
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
-			return err
+			taskCount += 1 
+			logger.Debug("Increasing taskCount by 1", logger.Fields{
+				"taskCount": taskCount,
+			})			return err
 		})
 	}
 }

@@ -265,6 +265,7 @@ func (acsSession *session) Start() error {
 						if timerCompleted {
 							// If the timer has been completed, then set DisconnectModeEnabled to true.
 							cfg.SetDisconnectModeEnabled(true)
+							acsSession.taskHandler.PauseEventsFlow()
 							logger.Debug("Turning DisconnectModeEnabled on after timer is completed", logger.Fields{
 								"disconnectionMode": cfg.GetDisconnectModeEnabled(),
 							})
@@ -435,6 +436,7 @@ func (acsSession *session) startACSSession(client wsclient.ClientServer) error {
 			// Once ACS successfully reconnects, set disconnectModeEnabled to FALSE
 			logger.Debug("Turning DisconnectModeEnabled off after successful reconnection.")
 			cfg.SetDisconnectModeEnabled(false)
+			acsSession.taskHandler.ResumeEventsFlow()
 		} else if acsSession.disconnectionTimer != nil {
 			// If reconnection is successful when the disconnection timer has already started,
 			// then terminate the timer. This way the timer can be re-initalized when connection
