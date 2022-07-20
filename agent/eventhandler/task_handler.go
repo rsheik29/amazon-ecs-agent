@@ -370,10 +370,11 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 
 			var err error
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
-			taskCount += 1 
+			taskCount += 1
 			logger.Debug("Increasing taskCount by 1", logger.Fields{
 				"taskCount": taskCount,
-			})			return err
+			})
+			return err
 		})
 	}
 }
