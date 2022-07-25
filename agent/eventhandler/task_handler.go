@@ -350,6 +350,7 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	// to our goroutine
 	done := false
 	taskCount := 0
+	logger.Debug("Resetting taskCount to zero")
 	// TODO: wire in the context here. Else, we have go routine leaks in tests
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
