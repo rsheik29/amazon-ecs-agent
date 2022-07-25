@@ -355,8 +355,7 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
 		// we haven't emptied the list so we should keep submitting
-		// if cfg.disconnectCapable?
-		if taskCount == throttlingLimit {
+		if taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
 			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
 			time.Sleep(time.Minute)
 			logger.Debug("Sleep completed: resuming sending task events.")
@@ -372,14 +371,14 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 
 			var err error
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
-			if err == nil {
-				taskCount++
-				logger.Debug("Increasing taskCount by 1", logger.Fields{
-					"taskCount": taskCount,
-				})
-			}
 			return err
 		})
+		if err == nil && !cfg.GetDisconnectModeEnabled() { 
+			taskCount++
+			logger.Debug("Increasing taskCount by 1", logger.Fields{
+				"taskCount": taskCount,
+			})
+		}
 	}
 }
 
