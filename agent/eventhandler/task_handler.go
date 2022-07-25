@@ -369,15 +369,15 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
 			return err
 		})
-		if handler.taskCount >= throttlingLimit && cfg.DisconnectCapable.Enabled() {
-			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
-			// waitComplete := handler.waitForDuration(time.Minute)
-			// if waitComplete {
-			time.Sleep(time.Minute)
-			logger.Debug("Sleep completed: resuming sending task events.")
-			handler.taskCount = 0
-			// }
-		}
+		// if handler.taskCount >= throttlingLimit && cfg.DisconnectCapable.Enabled() {
+		// 	logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+		// 	// waitComplete := handler.waitForDuration(time.Minute)
+		// 	// if waitComplete {
+		// 	time.Sleep(time.Minute)
+		// 	logger.Debug("Sleep completed: resuming sending task events.")
+		// 	handler.taskCount = 0
+		// 	// }
+		// }
 		if !cfg.GetDisconnectModeEnabled() {
 			if handler.taskCount == 0 {
 				logger.Debug("Starting taskCountTimer here")
@@ -428,7 +428,7 @@ func (taskEvents *taskSendableEvents) sendChange(change *sendableEvent,
 
 	taskEvents.lock.Lock()
 	defer taskEvents.lock.Unlock()
-	cfg := handler.cfg
+	// cfg := handler.cfg
 
 	// Add event to the queue
 	seelog.Debugf("TaskHandler: Adding event: %s", change.toString())
@@ -438,15 +438,15 @@ func (taskEvents *taskSendableEvents) sendChange(change *sendableEvent,
 		// If a send event is not already in progress, trigger the
 		// submitTaskEvents to start sending changes to ECS
 		taskEvents.sending = true
-		if handler.taskCount >= throttlingLimit && cfg.DisconnectCapable.Enabled() {
-			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
-			// waitComplete := handler.waitForDuration(time.Minute)
-			// if waitComplete {
-			time.Sleep(time.Minute)
-			logger.Debug("Sleep completed: resuming sending task events.")
-			handler.taskCount = 0
-			// }
-		}
+		// if handler.taskCount >= throttlingLimit && cfg.DisconnectCapable.Enabled() {
+		// 	logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+		// 	// waitComplete := handler.waitForDuration(time.Minute)
+		// 	// if waitComplete {
+		// 	time.Sleep(time.Minute)
+		// 	logger.Debug("Sleep completed: resuming sending task events.")
+		// 	handler.taskCount = 0
+		// 	// }
+		// }
 		go handler.submitTaskEvents(taskEvents, client, change.taskArn())
 	} else {
 		seelog.Debugf(
@@ -464,9 +464,18 @@ func (taskEvents *taskSendableEvents) submitFirstEvent(handler *TaskHandler, bac
 	seelog.Debug("TaskHandler: Acquiring lock for sending event...")
 	taskEvents.lock.Lock()
 	defer taskEvents.lock.Unlock()
-
+	cfg := handler.cfg
 	seelog.Debugf("TaskHandler: Acquired lock, processing event list: : %s", taskEvents.toStringUnsafe())
 
+	if handler.taskCount >= throttlingLimit && cfg.DisconnectCapable.Enabled() {
+		logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+		// waitComplete := handler.waitForDuration(time.Minute)
+		// if waitComplete {
+		time.Sleep(time.Minute)
+		logger.Debug("Sleep completed: resuming sending task events.")
+		handler.taskCount = 0
+		// }
+	}
 	if taskEvents.events.Len() == 0 {
 		seelog.Debug("TaskHandler: No events left; not retrying more")
 		taskEvents.sending = false
