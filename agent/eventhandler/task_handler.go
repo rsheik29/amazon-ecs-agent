@@ -357,12 +357,6 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
 		// we haven't emptied the list so we should keep submitting
-		if handler.taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
-			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
-			time.Sleep(time.Minute)
-			logger.Debug("Sleep completed: resuming sending task events.")
-			handler.taskCount = 0
-		}
 		backoff.Reset()
 		retry.RetryWithBackoffForTaskHandler(handler.cfg, taskARN, handler.disconnectedModeTaskEventRetryDelay, backoff, handler.eventFlowCtx, func() error {
 			// Lock and unlock within this function, allowing the list to be added
@@ -375,6 +369,14 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
 			return err
 		})
+		if handler.taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
+			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+			waitComplete := handler.waitForDuration(time.Minute)
+			if waitComplete {
+				logger.Debug("Sleep completed: resuming sending task events.")
+				handler.taskCount = 0
+			}
+		}
 		if !cfg.GetDisconnectModeEnabled() {
 			if handler.taskCount == 0 {
 				logger.Debug("starting taskCountTimer here")
@@ -389,6 +391,13 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 				handler.taskCount = 0
 			}
 		}
+	}
+}
+func (handler *TaskHandler) waitForDuration(delay time.Duration) bool {
+	reconnectTimer := time.NewTimer(delay)
+	select {
+	case <-reconnectTimer.C:
+		return true
 	}
 }
 
