@@ -348,6 +348,7 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 
 	// Mirror events.sending, but without the need to lock since this is local
 	// to our goroutine
+	cfg := handler.cfg
 	done := false
 	taskCount := 0
 	logger.Debug("Resetting taskCount to zero")
@@ -373,7 +374,7 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 			done, err = taskEvents.submitFirstEvent(handler, backoff)
 			return err
 		})
-		if err == nil && !cfg.GetDisconnectModeEnabled() { 
+		if !cfg.GetDisconnectModeEnabled() {
 			taskCount++
 			logger.Debug("Increasing taskCount by 1", logger.Fields{
 				"taskCount": taskCount,
