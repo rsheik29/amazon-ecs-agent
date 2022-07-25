@@ -53,7 +53,7 @@ const (
 	// throttlingLimit is the sustained throttling limit for Agent Modifying API Calls
 	// such as submitting task state changes.
 
-	throttlingLimit  = 25
+	throttlingLimit  = 2
 	initialTaskCount = 0
 )
 
@@ -432,11 +432,23 @@ func (taskEvents *taskSendableEvents) sendChange(change *sendableEvent,
 	// Add event to the queue
 	seelog.Debugf("TaskHandler: Adding event: %s", change.toString())
 	taskEvents.events.PushBack(change)
+	cfg := handler.cfg
 
 	if !taskEvents.sending {
 		// If a send event is not already in progress, trigger the
 		// submitTaskEvents to start sending changes to ECS
 		taskEvents.sending = true
+
+		if handler.taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
+			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
+			// waitComplete := handler.waitForDuration(time.Minute)
+			// if waitComplete {
+			time.Sleep(time.Minute)
+			logger.Debug("Sleep completed: resuming sending task events.")
+			handler.taskCount = 0
+			// }
+		}
+
 		go handler.submitTaskEvents(taskEvents, client, change.taskArn())
 	} else {
 		seelog.Debugf(
