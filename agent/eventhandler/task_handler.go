@@ -371,15 +371,16 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 		})
 		if handler.taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
 			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
-			waitComplete := handler.waitForDuration(time.Minute)
-			if waitComplete {
-				logger.Debug("Sleep completed: resuming sending task events.")
-				handler.taskCount = 0
-			}
+			// waitComplete := handler.waitForDuration(time.Minute)
+			// if waitComplete {
+			time.Sleep(time.Minute)
+			logger.Debug("Sleep completed: resuming sending task events.")
+			handler.taskCount = 0
+			// }
 		}
 		if !cfg.GetDisconnectModeEnabled() {
 			if handler.taskCount == 0 {
-				logger.Debug("starting taskCountTimer here")
+				logger.Debug("Starting taskCountTimer here")
 				handler.taskCountTimer = time.NewTimer(time.Duration(time.Minute))
 			}
 			handler.taskCount++
