@@ -53,7 +53,8 @@ const (
 	// throttlingLimit is the sustained throttling limit for Agent Modifying API Calls
 	// such as submitting task state changes.
 
-	throttlingLimit = 5
+	throttlingLimit  = 25
+	initialTaskCount = 0
 )
 
 // TaskHandler encapsulates the the map of a task arn to task and container events
@@ -81,9 +82,10 @@ type TaskHandler struct {
 	// time over which a call to SubmitTaskStateChange is made.
 	// The actual duration is randomly distributed between these
 	// two
-	minDrainEventsFrequency time.Duration
-	maxDrainEventsFrequency time.Duration
-
+	minDrainEventsFrequency             time.Duration
+	maxDrainEventsFrequency             time.Duration
+	taskCount                           int
+	taskCountTimer                      *time.Timer
 	state                               dockerstate.TaskEngineState
 	client                              api.ECSClient
 	ctx                                 context.Context
@@ -136,6 +138,7 @@ func NewTaskHandler(ctx context.Context,
 		disconnectedModeTaskEventRetryDelay: disconnectedModeTaskEventRetryDelay,
 		eventFlowCtx:                        eventFlowCtx,
 		eventFlowCtxCancel:                  eventFlowCtxCancel,
+		taskCount:                           initialTaskCount,
 	}
 	go taskHandler.startDrainEventsTicker()
 
@@ -350,17 +353,15 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 	// to our goroutine
 	cfg := handler.cfg
 	done := false
-	taskCount := 0
-	logger.Debug("Resetting taskCount to zero")
 	// TODO: wire in the context here. Else, we have go routine leaks in tests
 	for !done {
 		// If we looped back up here, we successfully submitted an event, but
 		// we haven't emptied the list so we should keep submitting
-		if taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
+		if handler.taskCount == throttlingLimit && cfg.DisconnectCapable.Enabled() {
 			logger.Debug("Reached throttling limit for sending task events, starting sleep for one minute")
 			time.Sleep(time.Minute)
 			logger.Debug("Sleep completed: resuming sending task events.")
-			taskCount = 0
+			handler.taskCount = 0
 		}
 		backoff.Reset()
 		retry.RetryWithBackoffForTaskHandler(handler.cfg, taskARN, handler.disconnectedModeTaskEventRetryDelay, backoff, handler.eventFlowCtx, func() error {
@@ -375,11 +376,29 @@ func (handler *TaskHandler) submitTaskEvents(taskEvents *taskSendableEvents, cli
 			return err
 		})
 		if !cfg.GetDisconnectModeEnabled() {
-			taskCount++
+			if handler.taskCount == 0 {
+				logger.Debug("starting taskCountTimer here")
+				handler.taskCountTimer = time.NewTimer(time.Duration(time.Minute))
+			}
+			handler.taskCount++
 			logger.Debug("Increasing taskCount by 1", logger.Fields{
-				"taskCount": taskCount,
+				"taskCount": handler.taskCount,
 			})
+			if handler.taskCountTimer != nil && handler.checkTaskCountTimer() {
+				handler.taskCountTimer = nil
+				handler.taskCount = 0
+			}
 		}
+	}
+}
+
+func (handler *TaskHandler) checkTaskCountTimer() bool {
+	logger.Debug("Checking TaskCount Timer")
+	select {
+	case <-handler.taskCountTimer.C:
+		return true
+	default:
+		return false
 	}
 }
 
