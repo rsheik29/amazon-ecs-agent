@@ -456,7 +456,7 @@ func (taskEvents *taskSendableEvents) submitFirstEvent(handler *TaskHandler, bac
 	seelog.Debug("TaskHandler: Acquiring lock for sending event...")
 	taskEvents.lock.Lock()
 	defer taskEvents.lock.Unlock()
-	cfg := handler.cfg
+	// cfg := handler.cfg
 	seelog.Debugf("TaskHandler: Acquired lock, processing event list: : %s", taskEvents.toStringUnsafe())
 
 	if taskEvents.events.Len() == 0 {
