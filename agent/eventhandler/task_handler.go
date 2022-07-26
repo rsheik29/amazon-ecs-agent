@@ -420,7 +420,7 @@ func (taskEvents *taskSendableEvents) sendChange(change *sendableEvent,
 
 	taskEvents.lock.Lock()
 	defer taskEvents.lock.Unlock()
-	// cfg := handler.cfg
+	cfg := handler.cfg
 
 	// Add event to the queue
 	seelog.Debugf("TaskHandler: Adding event: %s", change.toString())
